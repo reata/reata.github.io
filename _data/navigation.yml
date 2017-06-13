@@ -1,12 +1,8 @@
 # main links
 main:
-  # - title: "Blog"
-  #   url: /blog/
+#  - title: "Blog"
+#    url: /blog/
+  - title: "Jupyter Notebook"
+    url: /notebook/
   - title: "About"
     url: /about/
-  # - title: "Sample Posts"
-  #   url: /year-archive/
-  # - title: "Sample Collections"
-  #   url: /collection-archive/
-  # - title: "Sitemap"
-  #   url: /sitemap/
