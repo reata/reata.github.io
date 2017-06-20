@@ -10,7 +10,8 @@ author_profile: true
 
 ## 机器学习 Machine Learning ##
 
-- Coming Soon
+- [线性回归 Linear Regression](http://nbviewer.jupyter.org/github/reata/MachineLearning/blob/master/Linear%20Regression.ipynb)
+- To be continued
 
 ## 概率论与数理统计 Probability and Statistics ##
 
