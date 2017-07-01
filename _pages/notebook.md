@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "Jupyter Notebook"
+title: "以Jupyter Notebook记录的学习笔记"
 author: "胡俊伟"
 date: "16 June 2017"
 permalink: /notebook/
