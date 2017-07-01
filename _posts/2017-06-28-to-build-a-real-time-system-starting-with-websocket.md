@@ -1,10 +1,10 @@
 ---
-title: "从Websocket说起，实时数据系统演进"
+title: "从WebSocket说起，实时数据系统演进"
 excerpt: "拥抱事件驱动"
 header:
-  overlay_image: assets/images/websocket.png
+  overlay_image: assets/images/message_bus.jpg
   overlay_filter: 0.4
-  caption: ""
+  caption: "图片引用自https://engineeringblog.yelp.com/images/posts/2016-07-14-billions-of-messages-a-day-yelps-real-time-data-pipeline/1.jpg"
 categories:
   - web
   - realtime
@@ -24,7 +24,7 @@ date: "28 June 2017"
 
 真正意义的实时系统，我们希望用户在下单这个动作发生时，更准确地说，通常是在支付成功时，后台的数据系统里可以及时看到今日订单数据的变化。所谓及时，就是说除去必不可少的系统损耗外，数据流向的整条链路上是不应该存在轮询动作的，整个流程都应该由支付这个事件驱动。不必说，轮询还意味着资源的浪费。
 
-HTTP1.1及之前的协议，都建立在请求-响应模型之上，所有的通信需要客户端（也就是浏览器）主动发起。服务端即便感知到支付事件，也没有机制可以通过HTTP协议将消息推送到浏览器。而**Websocket**协议实现了服务端和浏览器的双向通信，本篇博文将以Websocket为起点，从前端逐步往后地探讨如何打造整个基于事件驱动的实时数据系统。代码示例使用`Tornado`框架，可以在这个[仓库](https://github.com/reata/real-time-dashboard-example)中找到。
+HTTP1.1及之前的协议，都建立在请求-响应模型之上，所有的通信需要客户端（也就是浏览器）主动发起。服务端即便感知到支付事件，也没有机制可以通过HTTP协议将消息推送到浏览器。而**WebSocket**协议实现了服务端和浏览器的双向通信，本篇博文将以Websocket为起点，从前端逐步往后地探讨如何打造整个基于**事件驱动**的实时数据系统。代码示例使用`Tornado`框架，可以在这个[仓库](https://github.com/reata/real-time-dashboard-example)中找到。
 
 <div style="text-align:center" markdown="1">
 ![websocket]({{ site.url }}{{ site.baseurl }}/assets/images/websocket.png)
@@ -34,7 +34,7 @@ HTTP1.1及之前的协议，都建立在请求-响应模型之上，所有的通
 
 作为一个minimum viable product，代码参见`feature/v0.1_monolithic`分支。简单设计了两个接口：
 
-订单模块的`ApiHandler`用来处理第三方支付平台的支付成功回调信息。在整个请求-响应过程中，通过DB操作，更新订单信息。HTTP请求结束之后，查询当前的订单信息，将该消息发送到报表模块所有的Websocket客户端：
+订单模块的`ApiHandler`用来处理第三方支付平台的支付成功回调信息。在整个请求-响应过程中，通过DB操作，更新订单信息。HTTP请求结束之后，查询当前的订单信息，将该消息发送到报表模块所有的WebSocket客户端：
 
 ``` python
 class ApiHandler(web.RequestHandler):
@@ -65,7 +65,7 @@ class ApiHandler(web.RequestHandler):
                 c.write_message(data)
 ```
 
-报表模块的`SocketHandler`接受浏览器发出的Websocket连接请求，将发起连接的用户加入到`rpt_ws_cl`变量中，并查询订单模块的数据库获取当前数据作为初始值，发送给客户端。
+报表模块的`SocketHandler`接受浏览器发出的WebSocket连接请求，将发起连接的用户加入到`rpt_ws_cl`变量中，并查询订单模块的数据库获取当前数据作为初始值，发送给客户端。
 
 ```python                
 class SocketHandler(websocket.WebSocketHandler):
@@ -110,7 +110,7 @@ class SocketHandler(websocket.WebSocketHandler):
 
 比较成熟的消息队列，包括`Kafka`, `RabbitMQ`等，这里为了简便起见，我们以更为轻量的`Redis` `Pub/Sub`功能来做功能实现，代码可以参见`feature/v0.2_pubsub`分支。
 
-修改后的订单模块回调接口如下，请求结束后，不再去访问报表模块的Websocket客户端列表，而是将消息直接发送到Redis：
+修改后的订单模块回调接口如下，请求结束后，不再去访问报表模块的WebSocket客户端列表，而是将消息直接发送到Redis：
 
 ``` python
 class ApiHandler(web.RequestHandler):
@@ -181,7 +181,7 @@ class SocketHandler(websocket.WebSocketHandler):
 
 尽管在我们的示例代码中，两个模块的代码写在一个tornado实例中。但由于它们通过消息队列进行了解耦，相互不共享其它内容，他们是可以做到单独发布的。并且想象中作为消息订阅方的业务监控系统、推荐系统，也都可以非常容易地加入到这个架构中来。
 
-消息队列在这里，就是`Java`生态圈中常常提到的`事件总线 Event Bus`的核心内容。
+消息队列在这里，就是`事件驱动架构`中常常提到的`事件总线 Event Bus`或`消息总线 Message Bus`的核心内容。
 
 但故事到这里并没有结束，可能你已经发现了，我们的架构里仍然有不合理的地方，订单模块发送的消息，是查询数据库聚合好的全量结果。可是，想象中的业务监控系统、推荐系统显然会有不同的聚合或者更为复杂的数据处理方式，作为生产者的订单模块是不可能一一为其定制化处理的。并且查询全量数据对订单模块来说本身也是一种负担，它不应该做任何聚合，而是应当增量地发送当前订单的信息，由消费者自行聚合数据。
 
@@ -232,3 +232,10 @@ class SocketHandler(websocket.WebSocketHandler):
 回到原点，我在反思，我们真的那么需要实时数据吗。演变到最后的这个系统，对于绝大多数永远成为不了巨头的公司来说，是不是已经成为了屠龙之技？可能Monolithic时代的实时架构，结合T+1的数据挖掘分析，很多情况下就已经足够了。符合业务场景的架构，才是好的架构。
 
 但不管怎样，只是从技术的角度来看，这一路走来，很有趣，对吗？不有趣，为什么要写代码呢？
+
+### 参考阅读
+
+1. [Billions of Messages a Day - Yelp's Real-time Data Pipeline](https://engineeringblog.yelp.com/2016/07/billions-of-messages-a-day-yelps-real-time-data-pipeline.html)
+2. [Event-driven Microservices Using RabbitMQ](https://runnable.com/blog/event-driven-microservices-using-rabbitmq)
+3. [Event Driven Architecture – The Basics](https://cloudramblings.me/2015/03/31/event-driven-architecture-the-basics/)
+4. [WebSocket 教程](http://www.ruanyifeng.com/blog/2017/05/websocket.html)
