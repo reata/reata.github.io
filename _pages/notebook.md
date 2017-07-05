@@ -11,6 +11,7 @@ author_profile: true
 ## 机器学习 Machine Learning ##
 
 - [线性回归 Linear Regression](http://nbviewer.jupyter.org/github/reata/MachineLearning/blob/master/Linear%20Regression.ipynb)
+- [逻辑回归 Logistic Regression](http://nbviewer.jupyter.org/github/reata/MachineLearning/blob/master/Logistic%20Regression.ipynb)
 - To be continued
 
 ## 概率论与数理统计 Probability and Statistics ##
