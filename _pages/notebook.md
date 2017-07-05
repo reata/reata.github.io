@@ -2,7 +2,7 @@
 layout: single
 title: "以Jupyter Notebook记录的学习笔记"
 author: "胡俊伟"
-date: "16 June 2017"
+date: "5 July 2017"
 permalink: /notebook/
 author_profile: true
 
