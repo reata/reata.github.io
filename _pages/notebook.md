@@ -12,6 +12,7 @@ author_profile: true
 
 - [线性回归 Linear Regression](http://nbviewer.jupyter.org/github/reata/MachineLearning/blob/master/Linear%20Regression.ipynb)
 - [逻辑回归 Logistic Regression](http://nbviewer.jupyter.org/github/reata/MachineLearning/blob/master/Logistic%20Regression.ipynb)
+- [广义线性模型 Generalized Linear Models](http://nbviewer.jupyter.org/github/reata/MachineLearning/blob/master/Generalized%20Linear%20Models.ipynb)
 - To be continued
 
 ## 概率论与数理统计 Probability and Statistics ##
