@@ -14,6 +14,7 @@ author_profile: true
 - [逻辑回归 Logistic Regression](http://nbviewer.jupyter.org/github/reata/MachineLearning/blob/master/Logistic%20Regression.ipynb)
 - [广义线性模型 Generalized Linear Models](http://nbviewer.jupyter.org/github/reata/MachineLearning/blob/master/Generalized%20Linear%20Models.ipynb)
 - [生成学习算法 Generative Learning Algorithm](http://nbviewer.jupyter.org/github/reata/MachineLearning/blob/master/Generative%20Learning%20Algorithms.ipynb)
+- [支持向量机 Support Vector Machines](http://nbviewer.jupyter.org/github/reata/MachineLearning/blob/master/Support%20Vector%20Machines.ipynb)
 - To be continued
 
 ## 概率论与数理统计 Probability and Statistics ##
