@@ -23,7 +23,7 @@ author_profile: true
 - [随机变量的数字特征 Mathematical Properties of Random Variable](http://nbviewer.jupyter.org/github/reata/ProbabilityAndStatistics/blob/master/Mathematical%20Properties%20of%20Random%20Variable.ipynb)
 - [参数估计 Parameter Estimation](http://nbviewer.jupyter.org/github/reata/ProbabilityAndStatistics/blob/master/Parameter%20Estimation.ipynb)
 
-## 密码学 Cryptography (一段关系Alice和Bob的罗曼史) ##
+## 密码学 Cryptography (一段关于Alice和Bob的罗曼史) ##
 
 - [导论与流密码 Introduction and Stream Ciphers](http://nbviewer.jupyter.org/github/reata/Cryptography/blob/master/Introduction%20and%20Stream%20Ciphers.ipynb)
 - [分组密码 Block Ciphers](http://nbviewer.jupyter.org/github/reata/Cryptography/blob/master/Block%20Ciphers.ipynb)
