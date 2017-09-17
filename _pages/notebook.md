@@ -2,7 +2,7 @@
 layout: single
 title: "以Jupyter Notebook记录的学习笔记"
 author: "胡俊伟"
-date: "10 July 2017"
+date: "17 Sep 2017"
 permalink: /notebook/
 author_profile: true
 
@@ -15,6 +15,7 @@ author_profile: true
 - [广义线性模型 Generalized Linear Models](http://nbviewer.jupyter.org/github/reata/MachineLearning/blob/master/Generalized%20Linear%20Models.ipynb)
 - [生成学习算法 Generative Learning Algorithm](http://nbviewer.jupyter.org/github/reata/MachineLearning/blob/master/Generative%20Learning%20Algorithms.ipynb)
 - [支持向量机 Support Vector Machines](http://nbviewer.jupyter.org/github/reata/MachineLearning/blob/master/Support%20Vector%20Machines.ipynb)
+- [学习理论 Learning Theory](http://nbviewer.jupyter.org/github/reata/MachineLearning/blob/master/Learning%20Theory.ipynb)
 - To be continued
 
 ## 概率论与数理统计 Probability and Statistics ##
