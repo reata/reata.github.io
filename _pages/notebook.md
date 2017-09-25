@@ -2,7 +2,7 @@
 layout: single
 title: "以Jupyter Notebook记录的学习笔记"
 author: "胡俊伟"
-date: "17 Sep 2017"
+date: "25 Sep 2017"
 permalink: /notebook/
 author_profile: true
 
@@ -16,6 +16,7 @@ author_profile: true
 - [生成学习算法 Generative Learning Algorithm](http://nbviewer.jupyter.org/github/reata/MachineLearning/blob/master/Generative%20Learning%20Algorithms.ipynb)
 - [支持向量机 Support Vector Machines](http://nbviewer.jupyter.org/github/reata/MachineLearning/blob/master/Support%20Vector%20Machines.ipynb)
 - [学习理论 Learning Theory](http://nbviewer.jupyter.org/github/reata/MachineLearning/blob/master/Learning%20Theory.ipynb)
+- [正则化和模型选择 Regularization and Model Selection](http://nbviewer.jupyter.org/github/reata/MachineLearning/blob/master/Regularization%20and%20Model%20Selection.ipynb)
 - To be continued
 
 ## 概率论与数理统计 Probability and Statistics ##
