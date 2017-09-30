@@ -17,6 +17,7 @@ author_profile: true
 - [支持向量机 Support Vector Machines](http://nbviewer.jupyter.org/github/reata/MachineLearning/blob/master/Support%20Vector%20Machines.ipynb)
 - [学习理论 Learning Theory](http://nbviewer.jupyter.org/github/reata/MachineLearning/blob/master/Learning%20Theory.ipynb)
 - [正则化和模型选择 Regularization and Model Selection](http://nbviewer.jupyter.org/github/reata/MachineLearning/blob/master/Regularization%20and%20Model%20Selection.ipynb)
+- [应用机器学习 Advice on Applying Machine Learning](http://nbviewer.jupyter.org/github/reata/MachineLearning/blob/master/Advice%20on%20Applying%20Machine%20Learning.ipynb)
 - To be continued
 
 ## 概率论与数理统计 Probability and Statistics ##
