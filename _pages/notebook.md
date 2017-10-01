@@ -2,7 +2,7 @@
 layout: single
 title: "以Jupyter Notebook记录的学习笔记"
 author: "胡俊伟"
-date: "25 Sep 2017"
+date: "1 Oct 2017"
 permalink: /notebook/
 author_profile: true
 
@@ -10,14 +10,16 @@ author_profile: true
 
 ## 机器学习 Machine Learning ##
 
-- [线性回归 Linear Regression](http://nbviewer.jupyter.org/github/reata/MachineLearning/blob/master/Linear%20Regression.ipynb)
-- [逻辑回归 Logistic Regression](http://nbviewer.jupyter.org/github/reata/MachineLearning/blob/master/Logistic%20Regression.ipynb)
-- [广义线性模型 Generalized Linear Models](http://nbviewer.jupyter.org/github/reata/MachineLearning/blob/master/Generalized%20Linear%20Models.ipynb)
-- [生成学习算法 Generative Learning Algorithm](http://nbviewer.jupyter.org/github/reata/MachineLearning/blob/master/Generative%20Learning%20Algorithms.ipynb)
-- [支持向量机 Support Vector Machines](http://nbviewer.jupyter.org/github/reata/MachineLearning/blob/master/Support%20Vector%20Machines.ipynb)
-- [学习理论 Learning Theory](http://nbviewer.jupyter.org/github/reata/MachineLearning/blob/master/Learning%20Theory.ipynb)
-- [正则化和模型选择 Regularization and Model Selection](http://nbviewer.jupyter.org/github/reata/MachineLearning/blob/master/Regularization%20and%20Model%20Selection.ipynb)
-- [应用机器学习 Advice on Applying Machine Learning](http://nbviewer.jupyter.org/github/reata/MachineLearning/blob/master/Advice%20on%20Applying%20Machine%20Learning.ipynb)
+- 监督学习 Supervised Learning
+    - [线性回归 Linear Regression](http://nbviewer.jupyter.org/github/reata/MachineLearning/blob/master/Linear%20Regression.ipynb)
+    - [逻辑回归 Logistic Regression](http://nbviewer.jupyter.org/github/reata/MachineLearning/blob/master/Logistic%20Regression.ipynb)
+    - [广义线性模型 Generalized Linear Models](http://nbviewer.jupyter.org/github/reata/MachineLearning/blob/master/Generalized%20Linear%20Models.ipynb)
+    - [生成学习算法 Generative Learning Algorithm](http://nbviewer.jupyter.org/github/reata/MachineLearning/blob/master/Generative%20Learning%20Algorithms.ipynb)
+    - [支持向量机 Support Vector Machines](http://nbviewer.jupyter.org/github/reata/MachineLearning/blob/master/Support%20Vector%20Machines.ipynb)
+- 学习理论 Learning Theory
+    - [学习理论 Learning Theory](http://nbviewer.jupyter.org/github/reata/MachineLearning/blob/master/Learning%20Theory.ipynb)
+    - [正则化和模型选择 Regularization and Model Selection](http://nbviewer.jupyter.org/github/reata/MachineLearning/blob/master/Regularization%20and%20Model%20Selection.ipynb)
+    - [应用机器学习 Advice on Applying Machine Learning](http://nbviewer.jupyter.org/github/reata/MachineLearning/blob/master/Advice%20on%20Applying%20Machine%20Learning.ipynb)
 - To be continued
 
 ## 概率论与数理统计 Probability and Statistics ##
