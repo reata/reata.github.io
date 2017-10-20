@@ -127,7 +127,11 @@ Xgboost分类的结果，是一个概率表述，默认当概率大于0.5时，�
 
 但是，比赛结束后，果然，有更性感的方案。最终排名第三的用户，公布了他的神经网络算法，所有特征是通过神经网络自动生成的，之后再用XGBoost跑分类模型。神经网络大法好！
 
-有兴趣可以参考这个帖子https://www.kaggle.com/c/instacart-market-basket-analysis/discussion/38097
+有兴趣可以参考[这里](https://www.kaggle.com/c/instacart-market-basket-analysis/discussion/38097)
+
+### 结语
+
+我的模型，最终在所有2623名参赛选手中，排名662，前26%，未获得奖牌。接下来，还需要继续努力。Go Kaggle!
 
 ### 参考阅读
 
