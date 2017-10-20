@@ -121,6 +121,14 @@ Xgboost分类的结果，是一个概率表述，默认当概率大于0.5时，�
 
 但是社区里有人指出，在目前评价标准人为扭曲的情况下，针对None单独做一个预测模型，最终的效果会更好。这个策略我没有进行尝试。
 
+### 更高阶的玩法
+
+在参与这项比赛的过程中，我就察觉出来了，我基本上一直在搞特征工程——想特征，测试，筛选特征。这个多少让数据科学变得不那么性感。
+
+但是，比赛结束后，果然，有更性感的方案。最终排名第三的用户，公布了他的神经网络算法，所有特征是通过神经网络自动生成的，之后再用XGBoost跑分类模型。神经网络大法好！
+
+有兴趣可以参考这个帖子https://www.kaggle.com/c/instacart-market-basket-analysis/discussion/38097
+
 ### 参考阅读
 
 1. [Repeat Buyer Prediction for E-Commerce](http://www.kdd.org/kdd2016/papers/files/adf0160-liuA.pdf)
