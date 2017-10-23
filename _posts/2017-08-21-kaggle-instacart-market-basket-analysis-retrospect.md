@@ -105,11 +105,7 @@ F1 = 2 / (1/Precision + 1/Recall) = 2TP / (2TP + FP + FN)
 
 实际上，在模型的训练过程中，有一个隐含的问题。之前提到了，这个复购预测的评价指标，是人均F1得分。而XGBoost默认的优化目标是[logloss](https://en.wikipedia.org/wiki/Likelihood_function#Log-likelihood)，二者不是正相关的。换言之，是可能出现logloss优化到最小，而人均F1不是最优的情况。
 
-在XGBoost提供的其它优化目标中，也不包含F1。应该没有分类算法可以针对F1来进行优化，更不可能针对人均F1得分优化。
-
-Xgboost分类的结果，是一个概率表述，默认当概率大于0.5时，分为正类，否则为反类。社区里找到的解决方案是，调整预估是正类的阈值到0.21左右。在这个阈值的情况下，人均F1得分会最大化。具体的值可以通过交叉验证来确定。
-
-不太确定这样的做法，是否从数学上严格成立。实际的效果还不错。
+二分类问题，针对F1进行优化，也有非常多的研究。可以针对性地设计优化函数，也可以针对条件概率分类器调试阈值。相关的论文可阅览参考阅读，我们这里采用的是后一种方法。因为Xgboost分类的结果，是一个概率表述，默认当概率大于0.5时，分为正类，否则为反类。调整预估是正类的阈值到0.21左右，在这个阈值的情况下，人均F1得分会最大化。具体的值是通过交叉验证来确定的。
 
 ### 无复购的处理
 
@@ -136,3 +132,5 @@ Xgboost分类的结果，是一个概率表述，默认当概率大于0.5时，�
 ### 参考阅读
 
 1. [Repeat Buyer Prediction for E-Commerce](http://www.kdd.org/kdd2016/papers/files/adf0160-liuA.pdf)
+2. [Optimizing the F-Measure in Multi-Label Classification: Plug-in Rule Approach versus Structured Loss Minimization](http://proceedings.mlr.press/v28/dembczynski13.pdf)
+3. [Thresholding Classifiers to Maximize F1 Score](https://arxiv.org/pdf/1402.1892.pdf)
