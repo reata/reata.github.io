@@ -2,7 +2,7 @@
 layout: single
 title: "以Jupyter Notebook记录的学习笔记"
 author: "胡俊伟"
-date: "24 Oct 2017"
+date: "28 Oct 2017"
 permalink: /notebook/
 author_profile: true
 
@@ -24,6 +24,7 @@ author_profile: true
     - [k均值聚类 k-Means Clustering](http://nbviewer.jupyter.org/github/reata/MachineLearning/blob/master/k-Means%20Clustering%20Algorithm.ipynb)
     - [高斯混合模型 Gaussian Mixture Models](http://nbviewer.jupyter.org/github/reata/MachineLearning/blob/master/Gaussian%20Mixture%20Models.ipynb)
     - [EM算法 The EM Algorithm](http://nbviewer.jupyter.org/github/reata/MachineLearning/blob/master/The%20EM%20Algorithm.ipynb)
+    - [因子分析 Factor Analysis](http://nbviewer.jupyter.org/github/reata/MachineLearning/blob/master/Factor%20Analysis.ipynb)
     - To be continued
 - 强化学习 Reinforcement Learning
     - To be continued
