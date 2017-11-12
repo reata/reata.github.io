@@ -115,7 +115,7 @@ F1 = 2 / (1/Precision + 1/Recall) = 2TP / (2TP + FP + FN)
 
 但这个同时滋生了另一个问题，None就成为了一个特殊的“商品”。根据目前的用户-商品模型，用户无复购，即“购买了None”的概率P(None) = 1 - P(复购商品1)...P(复购商品n)。也就是说，如果算法预测用户没有复购任何商品，这是用户就购买了None。
 
-社区里有人指出，在目前评价标准为人均F1的情况下，针对None单独做一个预测模型，最终的效果会更好。这个策略我没有进行尝试。
+社区里有人指出，在目前评价标准为人均F1的情况下，针对None单独做一个预测模型，最终的效果会更好。这个策略我没有进行尝试。可以参考[Instacart Market Basket Analysis, Winner's Interview: 2nd place, Kazuki Onodera](http://blog.kaggle.com/2017/09/21/instacart-market-basket-analysis-winners-interview-2nd-place-kazuki-onodera/?utm_source=Mailing+list&utm_campaign=3832403754-Kaggle_Newsletter_09-10-2017&utm_medium=email&utm_term=0_f42f9df1e1-3832403754-399140641)。
 
 ### 更高阶的玩法
 
@@ -123,7 +123,7 @@ F1 = 2 / (1/Precision + 1/Recall) = 2TP / (2TP + FP + FN)
 
 但是，比赛结束后，果然，有更性感的方案。最终排名第三的用户，公布了他的神经网络算法，所有特征是通过神经网络自动生成的，之后再用XGBoost跑分类模型。神经网络大法好！
 
-有兴趣可以参考[这里](https://www.kaggle.com/c/instacart-market-basket-analysis/discussion/38097)
+有兴趣可以参考[3rd-Place Solution Overview](https://www.kaggle.com/c/instacart-market-basket-analysis/discussion/38097)。
 
 ### 结语
 
