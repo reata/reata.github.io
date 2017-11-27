@@ -2,7 +2,7 @@
 layout: single
 title: "以Jupyter Notebook记录的学习笔记"
 author: "胡俊伟"
-date: "25 Nov 2017"
+date: "27 Nov 2017"
 permalink: /notebook/
 author_profile: true
 
@@ -28,7 +28,7 @@ author_profile: true
     - [主成分分析 Principal Components Analysis](http://nbviewer.jupyter.org/github/reata/MachineLearning/blob/master/Principal%20Components%20Analysis.ipynb)
     - [独立成分分析 Independent Components Analysis](http://nbviewer.jupyter.org/github/reata/MachineLearning/blob/master/Independent%20Components%20Analysis.ipynb)
 - 强化学习 Reinforcement Learning
-    - To be continued
+    - [强化学习和控制 Reinforcement Learning and Control](http://nbviewer.jupyter.org/github/reata/MachineLearning/blob/master/Reinforcement%20Learning%20and%20Control.ipynb)
 
 ## 概率论与数理统计 Probability and Statistics ##
 
