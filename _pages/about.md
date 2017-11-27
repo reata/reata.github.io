@@ -2,7 +2,7 @@
 layout: single
 title: "关于我"
 author: "胡俊伟"
-date: "17 Sep 2017"
+date: "27 Nov 2017"
 permalink: /about/
 author_profile: true
 
