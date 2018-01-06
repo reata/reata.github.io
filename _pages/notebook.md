@@ -2,11 +2,17 @@
 layout: single
 title: "以Jupyter Notebook记录的学习笔记"
 author: "胡俊伟"
-date: "27 Nov 2017"
+date: "6 Jan 2018"
 permalink: /notebook/
 author_profile: true
 
 ---
+
+## 深度学习 Deep Learning ##
+
+- 神经网络与深度学习 Neural Network and Deep Learning
+    - [深度学习简介 Introduction to Deep Learning](http://nbviewer.jupyter.org/github/reata/DeepLearning/blob/master/Introduction%20to%20Deep%20Learning.ipynb)
+    - 未完待续
 
 ## 机器学习 Machine Learning ##
 
