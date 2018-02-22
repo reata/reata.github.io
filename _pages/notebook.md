@@ -2,7 +2,7 @@
 layout: single
 title: "以Jupyter Notebook记录的学习笔记"
 author: "胡俊伟"
-date: "12 Feb 2018"
+date: "22 Feb 2018"
 permalink: /notebook/
 author_profile: true
 
@@ -17,6 +17,7 @@ author_profile: true
     - [深度神经网络 Deep Neural Network](http://nbviewer.jupyter.org/github/reata/DeepLearning/blob/master/Deep%20Neural%20Network.ipynb)
 - 提升深度神经网络 Improving Deep Neural Network
     - [深度学习的使用 Practical aspects of Deep Learning](http://nbviewer.jupyter.org/github/reata/DeepLearning/blob/master/Practical%20aspects%20of%20Deep%20Learning.ipynb)
+    - [优化算法 Optimization algorithms](http://nbviewer.jupyter.org/github/reata/DeepLearning/blob/master/Optimization%20algorithms.ipynb)
     - 未完待续
 
 ## 机器学习 Machine Learning ##
