@@ -2,7 +2,7 @@
 layout: single
 title: "以Jupyter Notebook记录的学习笔记"
 author: "胡俊伟"
-date: "2 Mar 2018"
+date: "4 Mar 2018"
 permalink: /notebook/
 author_profile: true
 
@@ -21,7 +21,8 @@ author_profile: true
     - [超参调节、批量标准化、编程框架 Hyperparameter tuning, Batch Normalization and Programming Frameworks](http://nbviewer.jupyter.org/github/reata/DeepLearning/blob/master/Hyperparameter%20tuning%2C%20Batch%20Normalization%20and%20Programming%20Frameworks.ipynb)
 - 结构化机器学习项目 Structuring Machine Learning Projects
     - [机器学习策略（1） ML Strategy(1)](http://nbviewer.jupyter.org/github/reata/DeepLearning/blob/master/ML%20Strategy%20%281%29.ipynb)
-    - 未完待续
+    - [机器学习策略（2） ML Strategy(2)](http://nbviewer.jupyter.org/github/reata/DeepLearning/blob/master/ML%20Strategy%20%282%29.ipynb)
+- 未完待续
 
 ## 机器学习 Machine Learning ##
 
