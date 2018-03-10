@@ -2,7 +2,7 @@
 layout: single
 title: "以Jupyter Notebook记录的学习笔记"
 author: "胡俊伟"
-date: "4 Mar 2018"
+date: "10 Mar 2018"
 permalink: /notebook/
 author_profile: true
 
@@ -22,7 +22,9 @@ author_profile: true
 - 结构化机器学习项目 Structuring Machine Learning Projects
     - [机器学习策略（1） ML Strategy(1)](http://nbviewer.jupyter.org/github/reata/DeepLearning/blob/master/ML%20Strategy%20%281%29.ipynb)
     - [机器学习策略（2） ML Strategy(2)](http://nbviewer.jupyter.org/github/reata/DeepLearning/blob/master/ML%20Strategy%20%282%29.ipynb)
-- 未完待续
+- 卷积神经网络 Convolutional Neural Networks
+    - [卷积神经网络基础 Foundations of Convolutional Neural Networks](http://nbviewer.jupyter.org/github/reata/DeepLearning/blob/master/Foundations%20of%20Convolutional%20Neural%20Networks.ipynb)
+    - 未完待续
 
 ## 机器学习 Machine Learning ##
 
