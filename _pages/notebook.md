@@ -2,7 +2,7 @@
 layout: single
 title: "以Jupyter Notebook记录的学习笔记"
 author: "胡俊伟"
-date: "2 Apr 2018"
+date: "9 Apr 2018"
 permalink: /notebook/
 author_profile: true
 
@@ -25,6 +25,8 @@ author_profile: true
 - 卷积神经网络 Convolutional Neural Networks
     - [卷积神经网络基础 Foundations of Convolutional Neural Networks](http://nbviewer.jupyter.org/github/reata/DeepLearning/blob/master/Foundations%20of%20Convolutional%20Neural%20Networks.ipynb)
     - [深度卷积模型：案例分析 Deep Convolutional Models: Case Studies](http://nbviewer.jupyter.org/github/reata/DeepLearning/blob/master/Deep%20Convolutional%20Models%20Case%20Studies.ipynb)
+    - [目标检测 Object Detection](http://nbviewer.jupyter.org/github/reata/DeepLearning/blob/master/Object%20detection.ipynb)
+    - 未完待续
 
 ## 机器学习 Machine Learning ##
 
