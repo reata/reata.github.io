@@ -2,7 +2,7 @@
 layout: single
 title: "以Jupyter Notebook记录的学习笔记"
 author: "胡俊伟"
-date: "12 May 2018"
+date: "14 May 2018"
 permalink: /notebook/
 author_profile: true
 
@@ -29,6 +29,7 @@ author_profile: true
     - [特殊应用：人脸识别&神经风格迁移 Special Application: Face Recognition & Neural Style Transfer](http://nbviewer.jupyter.org/github/reata/DeepLearning/blob/master/Special%20applications%20-%20Face%20recognition%20%26%20Neural%20style%20transfer.ipynb)
 - 序列模型 Sequence Models
     - [循环神经网络 Recurrent Neural Networks](http://nbviewer.jupyter.org/github/reata/DeepLearning/blob/master/Recurrent%20Neural%20Networks.ipynb)
+    - [自然语言处理&词嵌入 Natural Language Processing & Word Embeddings](http://nbviewer.jupyter.org/github/reata/DeepLearning/blob/master/Natural%20Language%20Processing%20%26%20Word%20Embeddings.ipynb)
     - 未完待续
 
 ## 机器学习 Machine Learning ##
