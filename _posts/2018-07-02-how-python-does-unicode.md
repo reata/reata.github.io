@@ -37,6 +37,12 @@ Unicode不是一种编码，这是需要首先厘清的一个概念。你可以�
 - 一个字符对应多个码位：码位`U+0327`，对应[COMBINING CEDILLA](http://www.fileformat.info/info/unicode/char/0327/index.htm)。码位`U+0063`，对应[LATIN SMALL LETTER C](http://www.fileformat.info/info/unicode/char/0063/index.htm)。将这两个码位组合起来，可以得到字符ç。而这个字符也可以用单一的码位`U+00E7`来表示，对应[LATIN SMALL LETTER C WITH CEDILLA](http://www.fileformat.info/info/unicode/char/00e7/index.htm)。这里`U+00E7`在Unicode中称为“合成形式”，`U+0063 U+0327`称为“分解形式”。Unicode定义了将彼此等价的序列转成同一序列的Unicode正规化规则。
 - 看起来一个码位对应多个字符：码位`U+FDFA`，对应[ARABIC LIGATURE SALLALLAHOU ALAYHE WASALLAM](http://www.fileformat.info/info/unicode/char/fdfa/index.htm)，打印出来显示为ﷺ。按照Unicode的分解规则，这个码位可以分解成接近20个“字符”。因为使用较为频繁，Unicode将其表示为一个码位。
 
+所以Unicode是字符集，或者更严格地说是码位集，它规定了一个码位的二进制代码，但没有规定这个二进制代码应该如何存储。比如汉字[“杭”](https://www.fileformat.info/info/unicode/char/676d/index.htm)，对应的码位`U+676D`，也就是十进制的`26477`（int('676D', 16) == 26477），二进制的`0b110011101101101`（bin(int('676D', 16)) == '0b110011101101101'; int('0b110011101101101', 2) == 26477）。这个二进制数有15位，这意味着存储该二进制数至少需要15位，也即至少需要两个字节。
+
+假设我们就用二进制代码来存储Unicode（这也是ASCII的思路），"杭"的二进制代码是15位，对其首位补0，得到一个16位的二进制数，'01100111:01101101'。这里引入了一个严重的问题，计算机怎么知道在这里两个字节表示一个码位，而不是两个字节表示两个码位。按两个码位来理解，对计算机完全行得通。从左往右，第一个字节，'01100111'，十进制的103，对应Unicode码位'U+0067'，也就是英语字母g。第二个字节，'01101101'，十进制的109，对应Unicode码位'U+006D'，也就是英语字母m。这样计算机无从分辨。
+
+假设稍作修改，我们要求，所有Unicode都表示为两个字节，不足两个字节的首位补0。那么，ASCII编码所能表示的英文字母和符号，第一个字节都是0。两个字节只有65536个码位，Unicode的数量是远大于这个数字。我们至少需要四个、五个字节，才能保存现有的所有字符。这对于存储来说存在浪费。更大的问题是，定死了字节数后，就意味着同时限制了Unicode的扩展性，使得Unicode变成了和ASCII一样字符编码统一的集合。ASCII只用一个字节，只能表示256个码位，无法扩展。
+
 ### Six在兼容Py2和Py3时，是如何处理Unicode与Str的
 
 TODO
