@@ -4,5 +4,7 @@ main:
 #    url: /blog/
   - title: "Jupyter Notebook"
     url: /notebook/
+  - title: "Github Gist"
+    url: /gist/
   - title: "About"
     url: /about/
