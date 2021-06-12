@@ -6,6 +6,7 @@ import Section from "../components/Section";
 import Footer from "../components/Footer";
 import {GatsbyImage, getImage} from "gatsby-plugin-image";
 import Header from "../components/Header";
+import readingTime from "../utils/readingTime";
 
 // A huge thanks for Project medium.css: https://github.com/lucagez/medium.css
 const useStyles = makeStyles((theme) => ({
@@ -74,7 +75,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Template({data}) {
   const {markdownRemark} = data // data.markdownRemark holds your post data
-  const {frontmatter, html} = markdownRemark
+  const {frontmatter, html, rawMarkdownBody} = markdownRemark
+  const readMinutes = readingTime(rawMarkdownBody);
   const classes = useStyles();
 
   return (
@@ -90,7 +92,7 @@ export default function Template({data}) {
                 <h1 className={classes.blogTitle}>{frontmatter.title}</h1>
                 <subtitle className={classes.blogExcerpt}>{frontmatter.excerpt}</subtitle>
                 <Box className={classes.authorName}><a href="https://reata.github.io/">Reata</a></Box>
-                <Box className={classes.authorSub}>{frontmatter.date} <span className="median-divider">·</span> 10 min
+                <Box className={classes.authorSub}>{frontmatter.date} <span className="median-divider">·</span> {readMinutes} min
                   read
                 </Box>
               </Box>
@@ -115,6 +117,7 @@ export const pageQuery = graphql`
   query($id: String!) {
     markdownRemark(id: { eq: $id }) {
       html
+      rawMarkdownBody
       frontmatter {
         date(formatString: "MMMM DD, YYYY")
         slug

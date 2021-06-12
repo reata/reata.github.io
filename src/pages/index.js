@@ -9,6 +9,7 @@ import Sidebar from "../components/Sidebar";
 import Footer from "../components/Footer";
 import {graphql} from "gatsby";
 import Header from "../components/Header";
+import readingTime from "../utils/readingTime";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -23,7 +24,10 @@ const useStyles = makeStyles((theme) => ({
 const IndexPage = ({data}) => {
   const classes = useStyles();
 
-  let posts = data.allMarkdownRemark.nodes.map(node => node.frontmatter).sort((a, b) => a.date < b.date ? 1 : -1);
+  let posts = data.allMarkdownRemark.nodes.map(node => {
+    return {...{"readMinutes": readingTime(node.rawMarkdownBody)}, ...node.frontmatter}
+  }).sort((a, b) => a.date < b.date ? 1 : -1);
+  console.log(posts);
   let mainFeaturedPost = posts[0];
   let featuredPosts = posts.slice(1, 3);
   let otherPosts = posts.slice(3, posts.length);
@@ -56,6 +60,7 @@ export const query = graphql`
 query IndexPostQuery {
   allMarkdownRemark {
     nodes {
+      rawMarkdownBody
       frontmatter {
         date
         excerpt

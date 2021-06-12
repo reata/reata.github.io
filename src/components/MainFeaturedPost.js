@@ -1,6 +1,6 @@
 import React from 'react';
 import {makeStyles} from '@material-ui/core/styles';
-import {CardActionArea, Grid, Paper, Typography} from '@material-ui/core';
+import {Box, CardActionArea, Grid, Paper, Typography} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   mainFeaturedPost: {
@@ -29,6 +29,9 @@ const useStyles = makeStyles((theme) => ({
       paddingRight: 0,
     },
   },
+  time: {
+    paddingTop: 30
+  },
 }));
 
 
@@ -46,10 +49,15 @@ export default function MainFeaturedPost(props) {
           <CardActionArea component="a" href={post.slug}>
             <div className={classes.mainFeaturedPostContent}>
               <Typography component="h1" variant="h3" color="inherit" gutterBottom>
-                {post.title}
+                <Box fontWeight="fontWeightBold">
+                  {post.title}
+                </Box>
               </Typography>
-              <Typography variant="h5" color="inherit" paragraph>
+              <Typography variant="h6" color="inherit">
                 {post.excerpt}
+              </Typography>
+              <Typography className={classes.time} variant="body1" color="inherit" paragraph>
+                {post.date} · {post.readMinutes} min read
               </Typography>
             </div>
           </CardActionArea>

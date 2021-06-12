@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card, CardContent, CardMedia, Divider, Grid, Hidden, Link, Typography} from '@material-ui/core';
+import {Box, Card, CardContent, CardMedia, Divider, Grid, Hidden, Link, Typography} from '@material-ui/core';
 import {makeStyles} from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
@@ -12,10 +12,14 @@ const useStyles = makeStyles({
     transform: 'scale(0.8)',
   },
   title: {
-    fontSize: 14,
+    // fontSize: 14,
+    paddingTop: 8
   },
-  pos: {
-    marginBottom: 12,
+  subtitle: {
+    paddingTop: 4,
+  },
+  time: {
+    paddingTop: 20
   },
   card: {
     display: 'flex',
@@ -42,25 +46,27 @@ export default function Post(props) {
       <Divider/>
       {posts.map(post => {
         return (
-            <Card className={classes.card}>
-              <div className={classes.cardDetails}>
-                <CardContent>
-                  <Typography variant="h5" component="h2">
+          <Card className={classes.card}>
+            <div className={classes.cardDetails}>
+              <CardContent>
+                <Typography className={classes.title} variant="h5" component="h2">
+                  <Box fontWeight="fontWeightBold">
                     <Link href={post.slug} color="inherit" underline="none">{post.title}</Link>
-                  </Typography>
-                  <Typography className={classes.pos} color="textSecondary">
-                    {post.date}
-                  </Typography>
-                  <Typography variant="body2" component="p">
-                    {post.excerpt}
-                  </Typography>
-                </CardContent>
-              </div>
-              <Hidden xsDown>
-                <CardMedia className={classes.cardMedia}
-                           image={post.image.childImageSharp.gatsbyImageData.images.fallback.src} title={post.title}/>
-              </Hidden>
-            </Card>
+                  </Box>
+                </Typography>
+                <Typography className={classes.subtitle} color="textSecondary">
+                  {post.excerpt}
+                </Typography>
+                <Typography variant="body2" component="p" className={classes.time} color="textSecondary">
+                  {post.date} · {post.readMinutes} min read
+                </Typography>
+              </CardContent>
+            </div>
+            <Hidden xsDown>
+              <CardMedia className={classes.cardMedia}
+                         image={post.image.childImageSharp.gatsbyImageData.images.fallback.src} title={post.title}/>
+            </Hidden>
+          </Card>
         )
       })}
     </Grid>

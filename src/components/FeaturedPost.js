@@ -1,10 +1,10 @@
 import React from 'react';
 import {makeStyles} from '@material-ui/core/styles';
-import {Card, CardActionArea, CardContent, CardMedia, Grid, Hidden, Typography} from '@material-ui/core';
+import {Box, Card, CardActionArea, CardContent, CardMedia, Grid, Hidden, Typography} from '@material-ui/core';
 
 const useStyles = makeStyles({
   title: {
-    minHeight: 64
+    minHeight: 90
   },
   card: {
     display: 'flex',
@@ -30,14 +30,18 @@ export default function FeaturedPost(props) {
             <Card className={classes.card}>
               <div className={classes.cardDetails}>
                 <CardContent>
-                  <Typography component="h2" variant="h5" className={classes.title}>
-                    {post.title}
-                  </Typography>
-                  <Typography variant="subtitle1" color="textSecondary">
-                    {post.date}
-                  </Typography>
-                  <Typography variant="subtitle1" paragraph>
-                    {post.excerpt}
+                  <Box className={classes.title}>
+                    <Typography component="h2" variant="h5">
+                      <Box fontWeight="fontWeightBold">
+                        {post.title}
+                      </Box>
+                    </Typography>
+                    <Typography color="textSecondary">
+                      {post.excerpt}
+                    </Typography>
+                  </Box>
+                  <Typography variant="body2" paragraph color="textSecondary">
+                    {post.date} · {post.readMinutes} min read
                   </Typography>
                 </CardContent>
               </div>
