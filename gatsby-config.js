@@ -303,6 +303,15 @@ module.exports = {
               maxWidth: 740,
             },
           },
+          {
+            resolve: `gatsby-remark-prismjs`,
+            options: {
+              classPrefix: "language-",
+              inlineCodeMarker: null,
+              showLineNumbers: false,
+              noInlineHighlight: true,
+            },
+          },
         ],
       },
     },
@@ -342,6 +351,9 @@ module.exports = {
       },
     },
     `gatsby-plugin-material-ui`,
+
+
+
     `gatsby-plugin-meta-redirect` // make sure to put last in the array
   ],
 };

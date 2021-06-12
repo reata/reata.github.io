@@ -5,6 +5,7 @@ import {Box, Container, Grid, makeStyles, Paper} from "@material-ui/core";
 import Section from "../components/Section";
 import Footer from "../components/Footer";
 import {GatsbyImage, getImage} from "gatsby-plugin-image";
+import Header from "../components/Header";
 
 // A huge thanks for Project medium.css: https://github.com/lucagez/medium.css
 const useStyles = makeStyles((theme) => ({
@@ -78,6 +79,7 @@ export default function Template({data}) {
 
   return (
     <React.Fragment>
+      <Header/>
       <CssBaseline/>
       <Container maxWidth="lg">
         <Section/>
