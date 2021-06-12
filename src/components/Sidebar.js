@@ -50,7 +50,7 @@ export default function Sidebar() {
           Social
         </Typography>
         {social.map((network) => (
-          <Link display="block" variant="body1" href={network.link} key={network} target="_blank">
+          <Link display="block" variant="body1" color="inherit" href={network.link} key={network} target="_blank">
             <Grid container direction="row" spacing={1} alignItems="center">
               <Grid item>
                 <network.icon/>

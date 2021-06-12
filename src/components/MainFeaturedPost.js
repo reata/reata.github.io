@@ -1,6 +1,6 @@
 import React from 'react';
 import {makeStyles} from '@material-ui/core/styles';
-import {Grid, Link, Paper, Typography} from '@material-ui/core';
+import {CardActionArea, Grid, Paper, Typography} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   mainFeaturedPost: {
@@ -42,18 +42,17 @@ export default function MainFeaturedPost(props) {
     <Paper className={classes.mainFeaturedPost} style={{backgroundImage: `url(${imageUrl})`}}>
       <div className={classes.overlay}/>
       <Grid container>
-        <Grid item md={6}>
-          <div className={classes.mainFeaturedPostContent}>
-            <Typography component="h1" variant="h3" color="inherit" gutterBottom>
-              {post.title}
-            </Typography>
-            <Typography variant="h5" color="inherit" paragraph>
-              {post.excerpt}
-            </Typography>
-            <Link variant="subtitle1" href={post.slug}>
-              Continue reading…
-            </Link>
-          </div>
+        <Grid item md={12}>
+          <CardActionArea component="a" href={post.slug}>
+            <div className={classes.mainFeaturedPostContent}>
+              <Typography component="h1" variant="h3" color="inherit" gutterBottom>
+                {post.title}
+              </Typography>
+              <Typography variant="h5" color="inherit" paragraph>
+                {post.excerpt}
+              </Typography>
+            </div>
+          </CardActionArea>
         </Grid>
       </Grid>
     </Paper>

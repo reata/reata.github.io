@@ -12,10 +12,11 @@ import {
   makeStyles
 } from "@material-ui/core";
 import LinkIcon from '@material-ui/icons/Link';
-import Header from "../components/Header";
+import Section from "../components/Section";
 import Footer from "../components/Footer";
 import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
+import Header from "../components/Header";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -40,9 +41,10 @@ const NotebookPage = ({data}) => {
 
   return (
     <React.Fragment>
+      <Header/>
       <CssBaseline/>
       <Container maxWidth="lg">
-        <Header/>
+        <Section/>
         <main>
           <Grid container justify="center" alignItems="center" className={classes.mainGrid}>
             <Typography variant="h4" gutterBottom={true}>

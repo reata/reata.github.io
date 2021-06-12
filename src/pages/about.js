@@ -1,9 +1,10 @@
 import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import {Container, Grid, Link, makeStyles} from "@material-ui/core";
-import Header from "../components/Header";
+import Section from "../components/Section";
 import Footer from "../components/Footer";
 import Typography from "@material-ui/core/Typography";
+import Header from "../components/Header";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -18,9 +19,10 @@ const AboutPage = () => {
 
   return (
     <React.Fragment>
+      <Header/>
       <CssBaseline/>
       <Container maxWidth="lg">
-        <Header/>
+        <Section/>
         <main>
           <Grid container spacing={5} className={classes.mainGrid}>
             <Typography variant="h4" gutterBottom={true}>

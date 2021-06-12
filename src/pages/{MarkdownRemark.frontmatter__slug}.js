@@ -2,7 +2,7 @@ import React from "react"
 import {graphql} from "gatsby"
 import CssBaseline from "@material-ui/core/CssBaseline";
 import {Box, Container, Grid, makeStyles, Paper} from "@material-ui/core";
-import Header from "../components/Header";
+import Section from "../components/Section";
 import Footer from "../components/Footer";
 import {GatsbyImage, getImage} from "gatsby-plugin-image";
 
@@ -80,7 +80,7 @@ export default function Template({data}) {
     <React.Fragment>
       <CssBaseline/>
       <Container maxWidth="lg">
-        <Header/>
+        <Section/>
         <main>
           <Grid container spacing={1} className={classes.blogPostHeader}>
             <Grid item xs={6}>

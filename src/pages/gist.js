@@ -1,11 +1,12 @@
 import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import {Container, Grid, ListItem, ListItemIcon, ListItemText, makeStyles} from "@material-ui/core";
-import Header from "../components/Header";
+import Section from "../components/Section";
 import Footer from "../components/Footer";
 import {graphql} from "gatsby";
 import LinkIcon from "@material-ui/icons/Link";
 import Typography from "@material-ui/core/Typography";
+import Header from "../components/Header";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -20,9 +21,10 @@ const GistPage = ({data}) => {
 
   return (
     <React.Fragment>
+      <Header/>
       <CssBaseline/>
       <Container maxWidth="lg">
-        <Header/>
+        <Section/>
         <main>
           <Grid container justify="center" alignItems="center" className={classes.mainGrid}>
             <Typography variant="h4" gutterBottom={true}>
