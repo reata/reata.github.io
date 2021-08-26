@@ -1,10 +1,10 @@
 import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import {Container, Grid, Link, makeStyles} from "@material-ui/core";
+import {Container, Grid, Link, ListItem, ListItemIcon, ListItemText, makeStyles, Typography} from "@material-ui/core";
 import Section from "../components/Section";
 import Footer from "../components/Footer";
-import Typography from "@material-ui/core/Typography";
 import Header from "../components/Header";
+import LinkIcon from "@material-ui/icons/Link";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -46,6 +46,17 @@ const AboutPage = () => {
             <Typography variant="h6" paragraph={true}>
               感谢访问我的博客，联系本人可点击首页邮箱。
             </Typography>
+          </Grid>
+          <Grid container spacing={5} className={classes.mainGrid}>
+            <Typography variant="h4" gutterBottom={true}>
+              个人项目
+            </Typography>
+            <ListItem button component="a" href="/project/sqllineage" target="_blank">
+              <ListItemIcon>
+                <LinkIcon/>
+              </ListItemIcon>
+              <ListItemText primary="SQLLineage: 基于Python的SQL血缘分析工具"/>
+            </ListItem>
           </Grid>
         </main>
       </Container>
