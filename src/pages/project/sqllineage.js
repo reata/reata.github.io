@@ -31,6 +31,7 @@ import GitHubIcon from "@material-ui/icons/GitHub";
 import HotelIcon from '@material-ui/icons/Hotel';
 import LaptopMacIcon from '@material-ui/icons/LaptopMac';
 import RepeatIcon from '@material-ui/icons/Repeat';
+import {CartesianGrid, Legend, Line, LineChart, Tooltip, XAxis, YAxis} from 'recharts';
 import Footer from "../../components/Footer";
 
 function TabPanel(props) {
@@ -61,6 +62,11 @@ function a11yProps(index) {
 }
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    flexDirection: 'column',
+    minHeight: '100vh',
+  },
   paper: {
     padding: '6px 16px',
   },
@@ -189,6 +195,61 @@ const cards = [
   },
 ];
 
+const dcards = [
+  {
+    title: "PyPI月下载量",
+    data: 14573
+  },
+  {
+    title: "GitHub Star",
+    data: 75
+  },
+  {
+    title: "DEMO月访问量",
+    data: 67854
+  }
+]
+
+
+const ddata = [
+  {
+    name: '08-20',
+    Without_Mirrors: 504,
+    With_Mirrors: 552,
+  },
+  {
+    name: '08-21',
+    Without_Mirrors: 493,
+    With_Mirrors: 495,
+  },
+  {
+    name: '08-22',
+    Without_Mirrors: 391,
+    With_Mirrors: 427,
+  },
+  {
+    name: '08-23',
+    Without_Mirrors: 52,
+    With_Mirrors: 52,
+  },
+  {
+    name: '08-24',
+    Without_Mirrors: 97,
+    With_Mirrors: 169,
+  },
+  {
+    name: '08-25',
+    Without_Mirrors: 96,
+    With_Mirrors: 140,
+  },
+  {
+    name: '08-26',
+    Without_Mirrors: 64,
+    With_Mirrors: 104,
+  },
+];
+
+
 const SQLLineagePage = () => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
@@ -198,7 +259,7 @@ const SQLLineagePage = () => {
   };
 
   return (
-    <React.Fragment>
+    <div className={classes.root}>
       <CssBaseline/>
       <AppBar position="static">
         <Toolbar>
@@ -277,51 +338,48 @@ const SQLLineagePage = () => {
       </TabPanel>
       <TabPanel value={value} index={1}>
         <Grid container spacing={3}>
-          <Grid item xs>
-            <Card>
-              <CardContent>
-                <Typography variant="h6">
-                  PyPI Monthly Download
-                </Typography>
-                <Typography variant="h3">
-                  14,573
-                </Typography>
-                <Typography variant="subtitle1">
-                  As of 08/26/2021
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs>
-            <Card>
-              <CardContent>
-                <Typography variant="h6">
-                  GitHub Star
-                </Typography>
-                <Typography variant="h3">
-                  75
-                </Typography>
-                <Typography variant="subtitle1">
-                  As of 08/26/2021
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs>
-            <Card>
-              <CardContent>
-                <Typography variant="h6">
-                  Demo App Montly PV
-                </Typography>
-                <Typography variant="h3">
-                  67854
-                </Typography>
-                <Typography variant="subtitle1">
-                  As of 08/26/2021
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
+          {dcards.map(card => (
+            <Grid item xs>
+              <Card>
+                <CardContent>
+                  <Typography component="h2" variant="h6" color="primary" gutterBottom>
+                    {card.title}
+                  </Typography>
+                  <Typography variant="h3">
+                    {card.data}
+                  </Typography>
+                  <Typography color="textSecondary">
+                    截至08/26/2021
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+
+        <Grid container justify="center" className={classes.paper}>
+          <Typography variant="h5">
+            PyPI下载趋势
+          </Typography>
+          <LineChart
+            width={1800}
+            height={300}
+            data={ddata}
+            margin={{
+              top: 20,
+              right: 30,
+              left: 20,
+              bottom: 5,
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Line type="monotone" dataKey="With_Mirrors" stroke="#8884d8" activeDot={{ r: 8 }} />
+            <Line type="monotone" dataKey="Without_Mirrors" stroke="#82ca9d" />
+          </LineChart>
         </Grid>
       </TabPanel>
       <TabPanel value={value} index={2}>
@@ -367,7 +425,7 @@ const SQLLineagePage = () => {
         </Timeline>
       </TabPanel>
       <Footer/>
-    </React.Fragment>
+    </div>
   );
 }
 
