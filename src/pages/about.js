@@ -8,6 +8,11 @@ import LinkIcon from "@material-ui/icons/Link";
 
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    flexDirection: 'column',
+    minHeight: '100vh',
+  },
   mainGrid: {
     marginTop: theme.spacing(3),
   },
@@ -18,7 +23,7 @@ const AboutPage = () => {
   const classes = useStyles();
 
   return (
-    <React.Fragment>
+    <div className={classes.root}>
       <Header/>
       <CssBaseline/>
       <Container maxWidth="lg">
@@ -61,7 +66,7 @@ const AboutPage = () => {
         </main>
       </Container>
       <Footer/>
-    </React.Fragment>
+    </div>
   )
 }
 
