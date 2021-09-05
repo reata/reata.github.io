@@ -2,8 +2,12 @@ import React from 'react';
 import {
   AppBar,
   Box,
+  Button,
   Card,
   CardContent,
+  CardMedia,
+  Container,
+  CssBaseline,
   Grid,
   Link,
   makeStyles,
@@ -27,6 +31,7 @@ import GitHubIcon from "@material-ui/icons/GitHub";
 import HotelIcon from '@material-ui/icons/Hotel';
 import LaptopMacIcon from '@material-ui/icons/LaptopMac';
 import RepeatIcon from '@material-ui/icons/Repeat';
+import Footer from "../../components/Footer";
 
 function TabPanel(props) {
   const {children, value, index, ...other} = props;
@@ -55,11 +60,24 @@ function a11yProps(index) {
   };
 }
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   paper: {
     padding: '6px 16px',
   },
-});
+  heroContent: {
+    backgroundColor: theme.palette.background.paper,
+    padding: theme.spacing(8, 0, 6),
+  },
+  heroButtons: {
+    marginTop: theme.spacing(2),
+  },
+  cardGrid: {
+    paddingTop: theme.spacing(6),
+  },
+  cardMedia: {
+    paddingTop: '56.25%', // 16:9
+  },
+}));
 
 const data = [
   {
@@ -152,16 +170,36 @@ const data = [
   },
 ]
 
+const cards = [
+  {
+    title: "支持任意SQL方言",
+    content: "SQLLineage底层的SQL解析库不对SQL方言做出任何限制，我们会尽力解析出您期待的结果",
+    image: "https://images.unsplash.com/photo-1597008641621-cefdcf718025?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=937&q=80"
+
+  },
+  {
+    title: "UI可视化",
+    content: "SQLLineage通过cytoscapejs对血缘图进行可视化，前端React App可以独立部署",
+    image: "https://images.unsplash.com/photo-1543946602-a0fce8117697?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
+  },
+  {
+    title: "API调用",
+    content: "对于编程用户，SQLLineage也支持在命令行或在Python代码中直接调用",
+    image: "https://images.unsplash.com/photo-1623282033815-40b05d96c903?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
+  },
+];
+
 const SQLLineagePage = () => {
   const classes = useStyles();
-  const [value, setValue] = React.useState(1);
+  const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   return (
-    <div>
+    <React.Fragment>
+      <CssBaseline/>
       <AppBar position="static">
         <Toolbar>
           <Grid
@@ -185,7 +223,57 @@ const SQLLineagePage = () => {
         </Toolbar>
       </AppBar>
       <TabPanel value={value} index={0}>
-        SQLLineage是一个基于Python的SQL血缘分析工具。
+        <div className={classes.heroContent}>
+          <Container maxWidth="sm">
+            <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
+              SQLLineage
+            </Typography>
+            <Typography variant="h5" align="center" color="textSecondary" paragraph>
+              SQLLineage是一个基于Python的SQL血缘分析工具。
+              这个包可以方便地分析任意SQL的输入表、输出表，并提供UI可视化。免除你从头开始研究SQL解析的烦恼。
+            </Typography>
+            <div className={classes.heroButtons}>
+              <Grid container spacing={2} justifyContent="center">
+                <Grid item>
+                  <Button variant="contained" color="primary" href="https://sqllineage.herokuapp.com/">
+                    Demo
+                  </Button>
+                </Grid>
+                <Grid item>
+                  <Button variant="outlined" color="primary" href="https://pypi.org/project/sqllineage/">
+                    安装
+                  </Button>
+                </Grid>
+              </Grid>
+            </div>
+          </Container>
+          <Container className={classes.cardGrid} maxWidth="md">
+            {/* End hero unit */}
+            <Grid container spacing={4}>
+              {cards.map((card, idx) => (
+                <Grid item key={idx} xs={12} sm={6} md={4}>
+                  <Card>
+                    <CardMedia
+                      className={classes.cardMedia}
+                      image={card.image}
+                      title={card.title}
+                    />
+                    <CardContent>
+                      <Typography gutterBottom variant="h5" component="h2">
+                        {card.title}
+                      </Typography>
+                      <Typography>
+                        {card.content}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </Grid>
+              ))}
+            </Grid>
+          </Container>
+        </div>
+
+
       </TabPanel>
       <TabPanel value={value} index={1}>
         <Grid container spacing={3}>
@@ -278,7 +366,8 @@ const SQLLineagePage = () => {
           </TimelineItem>
         </Timeline>
       </TabPanel>
-    </div>
+      <Footer/>
+    </React.Fragment>
   );
 }
 
