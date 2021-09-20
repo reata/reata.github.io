@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   AppBar,
   Box,
@@ -195,64 +195,45 @@ const cards = [
   },
 ];
 
-const dcards = [
-  {
-    title: "PyPI月下载量",
-    data: 14573
-  },
-  {
-    title: "GitHub Star",
-    data: 75
-  },
-  {
-    title: "DEMO月访问量",
-    data: 67854
-  }
-]
-
-
-const ddata = [
-  {
-    name: '08-20',
-    Without_Mirrors: 504,
-    With_Mirrors: 552,
-  },
-  {
-    name: '08-21',
-    Without_Mirrors: 493,
-    With_Mirrors: 495,
-  },
-  {
-    name: '08-22',
-    Without_Mirrors: 391,
-    With_Mirrors: 427,
-  },
-  {
-    name: '08-23',
-    Without_Mirrors: 52,
-    With_Mirrors: 52,
-  },
-  {
-    name: '08-24',
-    Without_Mirrors: 97,
-    With_Mirrors: 169,
-  },
-  {
-    name: '08-25',
-    Without_Mirrors: 96,
-    With_Mirrors: 140,
-  },
-  {
-    name: '08-26',
-    Without_Mirrors: 64,
-    With_Mirrors: 104,
-  },
-];
-
 
 const SQLLineagePage = () => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
+  const [download, setDownload] = React.useState(0);
+  const [downloadTrend, setDownloadTrend] = React.useState([]);
+
+  useEffect(() => {
+    fetch("https://magpie-bridge.herokuapp.com/api/pypistats/api/packages/sqllineage/recent")
+      .then(res => res.json())
+      .then(
+        (result) => {
+          setDownload(result.data.last_month)
+        },
+        (error) => {
+          console.log(error)
+        }
+      )
+    fetch("https://magpie-bridge.herokuapp.com/api/pypistats/api/packages/sqllineage/overall")
+      .then(res => res.json())
+      .then(
+        (result) => {
+          let date_cnt = result.data.length / 2;
+          let trend = []
+          for (let i = 0; i < date_cnt; i++) {
+            trend.push({
+              "name": result.data[i].date,
+              "With_Mirrors": result.data[i].downloads,
+              "Without_Mirrors": result.data[date_cnt + i].downloads
+            })
+          }
+          console.log(trend)
+          setDownloadTrend(trend)
+        },
+        (error) => {
+          console.log(error)
+        }
+      )
+  }, [])
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -338,7 +319,16 @@ const SQLLineagePage = () => {
       </TabPanel>
       <TabPanel value={value} index={1}>
         <Grid container spacing={3}>
-          {dcards.map(card => (
+          {[
+            {
+              title: "PyPI月下载量",
+              data: download
+            },
+            {
+              title: "GitHub Star",
+              data: 83
+            }
+          ].map(card => (
             <Grid item xs>
               <Card>
                 <CardContent>
@@ -349,7 +339,7 @@ const SQLLineagePage = () => {
                     {card.data}
                   </Typography>
                   <Typography color="textSecondary">
-                    截至08/26/2021
+                    截至{new Date().toISOString().split("T")[0]}
                   </Typography>
                 </CardContent>
               </Card>
@@ -364,7 +354,7 @@ const SQLLineagePage = () => {
           <LineChart
             width={1800}
             height={300}
-            data={ddata}
+            data={downloadTrend}
             margin={{
               top: 20,
               right: 30,
@@ -372,13 +362,13 @@ const SQLLineagePage = () => {
               bottom: 5,
             }}
           >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Line type="monotone" dataKey="With_Mirrors" stroke="#8884d8" activeDot={{ r: 8 }} />
-            <Line type="monotone" dataKey="Without_Mirrors" stroke="#82ca9d" />
+            <CartesianGrid strokeDasharray="3 3"/>
+            <XAxis dataKey="name"/>
+            <YAxis/>
+            <Tooltip/>
+            <Legend/>
+            <Line type="monotone" dataKey="With_Mirrors" stroke="#8884d8" activeDot={{r: 8}}/>
+            <Line type="monotone" dataKey="Without_Mirrors" stroke="#82ca9d"/>
           </LineChart>
         </Grid>
       </TabPanel>

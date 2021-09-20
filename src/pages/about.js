@@ -56,7 +56,7 @@ const AboutPage = () => {
             <Typography variant="h4" gutterBottom={true}>
               个人项目
             </Typography>
-            <ListItem button component="a" href="/project/sqllineage" target="_blank">
+            <ListItem button component="a" href="/project/sqllineage">
               <ListItemIcon>
                 <LinkIcon/>
               </ListItemIcon>
