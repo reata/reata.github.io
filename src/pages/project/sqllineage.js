@@ -201,6 +201,7 @@ const SQLLineagePage = () => {
   const [value, setValue] = React.useState(0);
   const [download, setDownload] = React.useState(0);
   const [downloadTrend, setDownloadTrend] = React.useState([]);
+  const [star, setStar] = React.useState(0);
 
   useEffect(() => {
     fetch("https://magpie-bridge.herokuapp.com/api/pypistats/api/packages/sqllineage/recent")
@@ -226,8 +227,17 @@ const SQLLineagePage = () => {
               "Without_Mirrors": result.data[date_cnt + i].downloads
             })
           }
-          console.log(trend)
           setDownloadTrend(trend)
+        },
+        (error) => {
+          console.log(error)
+        }
+      )
+    fetch("https://magpie-bridge.herokuapp.com/api/github/repos/reata/sqllineage")
+      .then(res => res.json())
+      .then(
+        (result) => {
+          setStar(result.stargazers_count)
         },
         (error) => {
           console.log(error)
@@ -326,7 +336,7 @@ const SQLLineagePage = () => {
             },
             {
               title: "GitHub Star",
-              data: 83
+              data: star
             }
           ].map(card => (
             <Grid item xs>
