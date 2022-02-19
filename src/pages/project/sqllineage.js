@@ -174,6 +174,46 @@ const data = [
     "color": "primary",
     "variant": "default"
   },
+  {
+    "time": "2021.10.20",
+    "icon": RepeatIcon,
+    "title": "社区动态",
+    "content": "GitHub Star数达到100",
+    "color": "secondary",
+    "variant": "default"
+  },
+  {
+    "time": "2021.11.13",
+    "icon": LaptopMacIcon,
+    "title": "v1.3.0",
+    "content": "字段级血缘解析",
+    "color": "primary",
+    "variant": "default"
+  },
+  {
+    "time": "2021.12.01",
+    "icon": RepeatIcon,
+    "title": "社区动态",
+    "content": "SQLLineage入选PyCoder's Weekly邮件订阅，单日收获17个Star",
+    "color": "secondary",
+    "variant": "default"
+  },
+  {
+    "time": "2021.12.10",
+    "icon": RepeatIcon,
+    "title": "社区动态",
+    "content": "单日下载1006次，首次突破1000+",
+    "color": "secondary",
+    "variant": "default"
+  },
+  {
+    "time": "2021.02.11",
+    "icon": RepeatIcon,
+    "title": "社区动态",
+    "content": "GitHub Star数达到200",
+    "color": "secondary",
+    "variant": "default"
+  },
 ]
 
 const cards = [
