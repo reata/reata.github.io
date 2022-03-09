@@ -49,6 +49,8 @@ where description = "from Excel";
 它是可以返回正确结果的。不过，作为一个有追求的程序员，怎么可以满足于90分对吧。我也想借此机会了解一下编译原理相关的东西，
 AST抽象语法树这个东西我听的够多了，它到底是个啥呢？这些都一起促成了做[SQLLineage](https://github.com/reata/sqllineage)这个项目的初衷。
 
+（2022.3，作者按：学过编译原理之后回头看，词法分析器Lexer用的形式语言就是正则哦。）
+
 ## 设计思路
 
 在动手开发之前，我先有过一些思考：
@@ -56,6 +58,8 @@ AST抽象语法树这个东西我听的够多了，它到底是个啥呢？这�
 我希望这个工具尽量简单，有命令行的界面，同时作为一个Python Package发布，这样pip安装后也可以import到其他的项目中。这个简单的工具，不会去执行SQL，
 或者连接任何元数据系统（比如Hive metastore）。我只对代码进行静态分析。优点当然是简单，而劣势就是可能这个血缘解析只能完美地做到表级别的血缘，
 对于字段级别的血缘，假如有select *的情况，就会丢失信息。这也是我暂时没有做字段级别血缘的主要原因。
+
+（2022.3，作者按：字段级别的血缘已经有初步的支持啦，请看[SQLLineage v1.3：迈向字段血缘](/blog/sqllineage-towards-column-lineage/)）
 
 另外一个取舍是从原理层面来说，我不想自己去做parser，最理想的情况是有一个通用的parser，可以将绝大多数常见的SQL方言解析成AST，
 然后我只要对AST进行分析，产出源表、目标表等人类可读的结果就好。遵循这个思路，我找到了[sqlparse](https://github.com/andialbrecht/sqlparse)这个项目，
@@ -122,6 +126,9 @@ result.draw()
 
 
 SQLLineage目前已经发布v1.0版本，进入稳定可用状态，让我一起来探索SQL血缘吧！
+
+（2022.3，作者按：从v1.2.2版本起，SQLLineage可以部署为一个Web App，欢迎访问这个[DEMO](https://sqllineage.herokuapp.com/)）
+
 
 ## 相关链接
 - 代码：[https://github.com/reata/sqllineage](https://github.com/reata/sqllineage)
