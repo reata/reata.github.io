@@ -290,6 +290,10 @@ module.exports = {
       {
         title: "在Python中查询MySQL是CPU密集型还是IO密集型任务，能用多线程来加速吗？",
         link: "https://gist.github.com/reata/7894016938bc4110bb5516cdd87fe1a0"
+      },
+      {
+        title: "SQL中JOIN时，过滤条件写在ON里和写在WHERE条件里，二者等价吗？",
+        link: "https://gist.github.com/reata/f00d3d4c0066d5e7c7a01351dd56c9c1"
       }
     ]
   },
