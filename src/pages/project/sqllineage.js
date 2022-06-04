@@ -207,10 +207,18 @@ const data = [
     "variant": "default"
   },
   {
-    "time": "2021.02.11",
+    "time": "2021.5.17",
     "icon": RepeatIcon,
     "title": "社区动态",
-    "content": "GitHub Star数达到200",
+    "content": "单日下载8019次，首次突破5000+",
+    "color": "secondary",
+    "variant": "default"
+  },
+  {
+    "time": "2021.6.3",
+    "icon": RepeatIcon,
+    "title": "社区动态",
+    "content": "GitHub Star数达到300",
     "color": "secondary",
     "variant": "default"
   },
