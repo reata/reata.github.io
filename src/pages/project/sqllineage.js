@@ -248,15 +248,19 @@ const SQLLineagePage = () => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const [download, setDownload] = React.useState(0);
+  const [downloadDaily, setDownloadDaily] = React.useState(0);
   const [downloadTrend, setDownloadTrend] = React.useState([]);
   const [star, setStar] = React.useState(0);
+  const [fork, setFork] = React.useState(0);
+  const [openIssues, setOpenIssues] = React.useState(0);
 
   useEffect(() => {
     fetch("https://magpie-bridge.herokuapp.com/api/pypistats/api/packages/sqllineage/recent")
       .then(res => res.json())
       .then(
         (result) => {
-          setDownload(result.data.last_month)
+          setDownload(result.data.last_month);
+          setDownloadDaily(result.data.last_day)
         },
         (error) => {
           console.log(error)
@@ -270,7 +274,7 @@ const SQLLineagePage = () => {
           let trend = []
           for (let i = 0; i < date_cnt; i++) {
             trend.push({
-              "name": result.data[i].date,
+              "name": result.data[i].date.slice(5, 10),
               "With_Mirrors": result.data[i].downloads,
               "Without_Mirrors": result.data[date_cnt + i].downloads
             })
@@ -285,7 +289,9 @@ const SQLLineagePage = () => {
       .then(res => res.json())
       .then(
         (result) => {
-          setStar(result.stargazers_count)
+          setStar(result.stargazers_count);
+          setFork(result.forks_count);
+          setOpenIssues(result.open_issues)
         },
         (error) => {
           console.log(error)
@@ -379,12 +385,24 @@ const SQLLineagePage = () => {
         <Grid container spacing={3}>
           {[
             {
+              title: "PyPI昨日下载量",
+              data: downloadDaily
+            },
+            {
               title: "PyPI月下载量",
               data: download
             },
             {
               title: "GitHub Star",
               data: star
+            },
+            {
+              title: "GitHub Fork",
+              data: fork
+            },
+            {
+              title: "GitHub Open Issues",
+              data: openIssues
             }
           ].map(card => (
             <Grid item xs>
@@ -395,9 +413,6 @@ const SQLLineagePage = () => {
                   </Typography>
                   <Typography variant="h3">
                     {card.data}
-                  </Typography>
-                  <Typography color="textSecondary">
-                    截至{new Date().toISOString().split("T")[0]}
                   </Typography>
                 </CardContent>
               </Card>
@@ -421,12 +436,12 @@ const SQLLineagePage = () => {
             }}
           >
             <CartesianGrid strokeDasharray="3 3"/>
-            <XAxis dataKey="name"/>
+            <XAxis dataKey="name" minTickGap={20} />
             <YAxis/>
             <Tooltip/>
             <Legend/>
-            <Line type="monotone" dataKey="With_Mirrors" stroke="#8884d8" activeDot={{r: 8}}/>
-            <Line type="monotone" dataKey="Without_Mirrors" stroke="#82ca9d"/>
+            <Line type="monotone" dataKey="With_Mirrors" stroke="#ea8f74" activeDot={{r: 8}}/>
+            <Line type="monotone" dataKey="Without_Mirrors" stroke="#00516c"/>
           </LineChart>
         </Grid>
       </TabPanel>
