@@ -31,7 +31,7 @@ import GitHubIcon from "@material-ui/icons/GitHub";
 import HotelIcon from '@material-ui/icons/Hotel';
 import LaptopMacIcon from '@material-ui/icons/LaptopMac';
 import RepeatIcon from '@material-ui/icons/Repeat';
-import {CartesianGrid, Legend, Line, LineChart, Tooltip, XAxis, YAxis} from 'recharts';
+import {Area, AreaChart, CartesianGrid, Legend, Line, LineChart, Tooltip, XAxis, YAxis} from 'recharts';
 import Footer from "../../components/Footer";
 
 function TabPanel(props) {
@@ -249,8 +249,10 @@ const SQLLineagePage = () => {
   const [value, setValue] = React.useState(0);
   const [download, setDownload] = React.useState(0);
   const [downloadDaily, setDownloadDaily] = React.useState(0);
+  const [downloadWeekly, setDownloadWeekly] = React.useState(0);
   const [downloadTrend, setDownloadTrend] = React.useState([]);
   const [star, setStar] = React.useState(0);
+  const [starTrend, setStarTrend] = React.useState([]);
   const [fork, setFork] = React.useState(0);
   const [openIssues, setOpenIssues] = React.useState(0);
 
@@ -260,6 +262,7 @@ const SQLLineagePage = () => {
       .then(
         (result) => {
           setDownload(result.data.last_month);
+          setDownloadWeekly(result.data.last_week);
           setDownloadDaily(result.data.last_day)
         },
         (error) => {
@@ -292,6 +295,16 @@ const SQLLineagePage = () => {
           setStar(result.stargazers_count);
           setFork(result.forks_count);
           setOpenIssues(result.open_issues)
+        },
+        (error) => {
+          console.log(error)
+        }
+      )
+    fetch("https://magpie-bridge.herokuapp.com/api/starhistory/reata/sqllineage")
+      .then(res => res.json())
+      .then(
+        (result) => {
+          setStarTrend(result)
         },
         (error) => {
           console.log(error)
@@ -389,6 +402,10 @@ const SQLLineagePage = () => {
               data: downloadDaily
             },
             {
+              title: "PyPI上周下载量",
+              data: downloadWeekly
+            },
+            {
               title: "PyPI月下载量",
               data: download
             },
@@ -443,6 +460,28 @@ const SQLLineagePage = () => {
             <Line type="monotone" dataKey="With_Mirrors" stroke="#ea8f74" activeDot={{r: 8}}/>
             <Line type="monotone" dataKey="Without_Mirrors" stroke="#00516c"/>
           </LineChart>
+        </Grid>
+
+        <Grid container justify="center" className={classes.paper}>
+          <Typography variant="h5">
+            GitHub Star趋势
+          </Typography>
+          <AreaChart
+            width={1800}
+            height={300}
+            data={starTrend}
+            margin={{
+              top: 20,
+              right: 30,
+              left: 20,
+              bottom: 5,
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3"/>
+            <XAxis dataKey="date" minTickGap={50} />
+            <YAxis/>
+            <Area type="monotone" dataKey="star_cum_cnt" stroke="#00516c"/>
+          </AreaChart>
         </Grid>
       </TabPanel>
       <TabPanel value={value} index={2}>
