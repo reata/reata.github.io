@@ -1,17 +1,11 @@
 import React from "react";
-import {AppBar, makeStyles, Toolbar, Typography} from "@material-ui/core";
+import { AppBar, Toolbar, Typography } from "@mui/material";
+
 
 const title = "Reata's Blog";
 
-const useStyles = makeStyles((theme) => ({
-  toolbarTitle: {
-    flex: 1,
-  },
-}));
 
 export default function Header() {
-  const classes = useStyles();
-
   return (
     <AppBar position="static" color="inherit">
       <Toolbar>
@@ -21,7 +15,7 @@ export default function Header() {
           color="inherit"
           align="center"
           noWrap
-          className={classes.toolbarTitle}
+          sx={{ flex: 1 }}
         >
           {title}
         </Typography>

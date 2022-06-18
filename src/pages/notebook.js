@@ -1,43 +1,16 @@
 import React from 'react';
 import {graphql} from 'gatsby'
-import CssBaseline from '@material-ui/core/CssBaseline';
-import {
-  Container,
-  Grid,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  ListSubheader,
-  makeStyles
-} from "@material-ui/core";
-import LinkIcon from '@material-ui/icons/Link';
+import CssBaseline from '@mui/material/CssBaseline';
+import { Container, Grid, List, ListItem, ListItemIcon, ListItemText, ListSubheader } from "@mui/material";
+import LinkIcon from '@mui/icons-material/Link';
 import Section from "../components/Section";
 import Footer from "../components/Footer";
-import Divider from "@material-ui/core/Divider";
-import Typography from "@material-ui/core/Typography";
+import Divider from "@mui/material/Divider";
+import Typography from "@mui/material/Typography";
 import Header from "../components/Header";
 
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-    backgroundColor: theme.palette.background.paper,
-  },
-  nested: {
-    paddingLeft: theme.spacing(4),
-  },
-  secondaryHeading: {
-    color: theme.palette.text.secondary,
-  },
-  mainGrid: {
-    marginTop: theme.spacing(3),
-  },
-}));
-
-
 const NotebookPage = ({data}) => {
-  const classes = useStyles();
 
   return (
     <React.Fragment>
@@ -46,7 +19,7 @@ const NotebookPage = ({data}) => {
       <Container maxWidth="lg">
         <Section/>
         <main>
-          <Grid container justify="center" alignItems="center" className={classes.mainGrid}>
+          <Grid container justifyContent="center" alignItems="center" sx={{marginTop: 3}}>
             <Typography variant="h4" gutterBottom={true}>
               以Jupyter Notebook记录的学习笔记
             </Typography>
@@ -60,17 +33,16 @@ const NotebookPage = ({data}) => {
                       {notebook.title}
                     </ListSubheader>
                   }
-                  className={classes.root}
                 >
                   {notebook.children.map((child1) => {
                     if (child1.children !== null) {
                       return <Container>
                         <ListItem>
-                          <ListItemText primary={child1.title} className={classes.secondaryHeading}/>
+                          <ListItemText primary={child1.title} sx={{color: 'text.secondary'}}/>
                         </ListItem>
                         <List component="div" disablePadding>
                           {child1.children.map((child2) => {
-                            return <ListItem className={classes.nested} button component="a" href={child2.link}
+                            return <ListItem sx={{paddingLeft: 4}} button component="a" href={child2.link}
                                              target="_blank">
                               <ListItemIcon>
                                 <LinkIcon/>
@@ -81,7 +53,7 @@ const NotebookPage = ({data}) => {
                         </List>
                       </Container>
                     } else {
-                      return <ListItem className={classes.nested} button component="a" href={child1.link}
+                      return <ListItem sx={{paddingLeft: 4}} button component="a" href={child1.link}
                                        target="_blank">
                         <ListItemIcon>
                           <LinkIcon/>
@@ -98,7 +70,7 @@ const NotebookPage = ({data}) => {
       </Container>
       <Footer/>
     </React.Fragment>
-  )
+  );
 }
 
 export default NotebookPage

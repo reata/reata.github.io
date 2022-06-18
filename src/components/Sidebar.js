@@ -1,26 +1,9 @@
 import React from 'react';
-import {makeStyles} from '@material-ui/core/styles';
-import {Avatar, Grid, Link, Paper, Typography} from '@material-ui/core';
-import GitHubIcon from "@material-ui/icons/GitHub";
-import LocationOnIcon from '@material-ui/icons/LocationOn';
-import MailIcon from '@material-ui/icons/Mail';
+import {Avatar, Grid, Link, Paper, Typography} from '@mui/material';
+import GitHubIcon from "@mui/icons-material/GitHub";
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import MailIcon from '@mui/icons-material/Mail';
 import bio_photo from "../images/bio-photo.jpg";
-
-
-const useStyles = makeStyles((theme) => ({
-  sidebarAboutBox: {
-    padding: theme.spacing(2),
-    backgroundColor: theme.palette.grey[100],
-  },
-  sidebarSection: {
-    marginTop: theme.spacing(3),
-  },
-  large: {
-    width: theme.spacing(8),
-    height: theme.spacing(8),
-    marginBottom: theme.spacing(2)
-  },
-}));
 
 
 const title = '胡俊伟';
@@ -36,21 +19,31 @@ const social = [
 ];
 
 export default function Sidebar() {
-  const classes = useStyles();
 
   return (
     <Grid item xs={12} md={4}>
-      <Paper className={classes.sidebarAboutBox}>
-        <Avatar alt="Remy Sharp" src={bio_photo} className={classes.large}/>
+      <Paper sx={{padding: 2, backgroundColor: 'rgba(0,0,0,.03)'}}>
+        <Avatar alt="Remy Sharp" src={bio_photo} sx={{
+          width: 80,
+          height: 80,
+          marginBottom: 2
+        }}/>
         <Typography variant="h6" gutterBottom>
           {title}
         </Typography>
         <Typography>{description}</Typography>
-        <Typography variant="h6" gutterBottom className={classes.sidebarSection}>
+        <Typography variant="body1" gutterBottom sx={{marginTop: 3}}>
           Social
         </Typography>
         {social.map((network) => (
-          <Link display="block" variant="body1" color="inherit" href={network.link} key={network} target="_blank">
+          <Link
+            display="block"
+            variant="body1"
+            color="inherit"
+            href={network.link}
+            key={network}
+            target="_blank"
+            underline="hover">
             <Grid container direction="row" spacing={1} alignItems="center">
               <Grid item>
                 <network.icon/>

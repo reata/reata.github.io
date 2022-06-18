@@ -1,25 +1,8 @@
 import React from 'react';
-import {makeStyles} from '@material-ui/core/styles';
-import {Box, Card, CardActionArea, CardContent, CardMedia, Grid, Hidden, Typography} from '@material-ui/core';
+import {Box, Card, CardActionArea, CardContent, CardMedia, Grid, Hidden, Typography} from '@mui/material';
 
-const useStyles = makeStyles({
-  title: {
-    minHeight: 90
-  },
-  card: {
-    display: 'flex',
-  },
-  cardDetails: {
-    flex: 1,
-  },
-  cardMedia: {
-    width: 160,
-  },
-});
 
 export default function FeaturedPost(props) {
-  const classes = useStyles();
-
   const {posts} = props;
 
   return (
@@ -27,10 +10,10 @@ export default function FeaturedPost(props) {
       {posts.map((post) => (
         <Grid item xs={12} md={6}>
           <CardActionArea component="a" href={post.slug}>
-            <Card className={classes.card}>
-              <div className={classes.cardDetails}>
+            <Card sx={{display: 'flex'}}>
+              <Box sx={{flex: 1}}>
                 <CardContent>
-                  <Box className={classes.title}>
+                  <Box sx={{minHeight: 90}}>
                     <Typography component="h2" variant="h5">
                       <Box fontWeight="fontWeightBold">
                         {post.title}
@@ -44,9 +27,9 @@ export default function FeaturedPost(props) {
                     {post.date} · {post.readMinutes} min read
                   </Typography>
                 </CardContent>
-              </div>
-              <Hidden xsDown>
-                <CardMedia className={classes.cardMedia}
+              </Box>
+              <Hidden smDown>
+                <CardMedia sx={{width: 160}}
                            image={post.image.childImageSharp.gatsbyImageData.images.fallback.src} title={post.title}/>
               </Hidden>
             </Card>

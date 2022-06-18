@@ -1,13 +1,6 @@
 import React from 'react';
-import {makeStyles} from '@material-ui/core/styles';
-import {Chip, Toolbar} from '@material-ui/core';
+import {Chip, Toolbar} from '@mui/material';
 
-const useStyles = makeStyles((theme) => ({
-  toolbarSecondary: {
-    justifyContent: 'space-between',
-    overflowX: 'auto',
-  },
-}));
 
 const sections = [
   {title: 'Blog', url: '/'},
@@ -17,11 +10,13 @@ const sections = [
 ];
 
 export default function Section() {
-  const classes = useStyles();
 
   return (
     <React.Fragment>
-      <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
+      <Toolbar component="nav" variant="dense" sx={{
+        justifyContent: 'space-between',
+        overflowX: 'auto',
+      }}>
         {sections.map((section) => (
           <Chip label={section.title} component="a" href={section.url} clickable/>
         ))}

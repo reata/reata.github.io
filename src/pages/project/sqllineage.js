@@ -10,13 +10,11 @@ import {
   CssBaseline,
   Grid,
   Link,
-  makeStyles,
-  Paper,
   Tab,
   Tabs,
   Toolbar,
-  Typography
-} from '@material-ui/core';
+  Typography,
+} from '@mui/material';
 import {
   Timeline,
   TimelineConnector,
@@ -25,12 +23,12 @@ import {
   TimelineItem,
   TimelineOppositeContent,
   TimelineSeparator
-} from '@material-ui/lab';
-import FastfoodIcon from '@material-ui/icons/Fastfood';
-import GitHubIcon from "@material-ui/icons/GitHub";
-import HotelIcon from '@material-ui/icons/Hotel';
-import LaptopMacIcon from '@material-ui/icons/LaptopMac';
-import RepeatIcon from '@material-ui/icons/Repeat';
+} from '@mui/lab';
+import FastfoodIcon from '@mui/icons-material/Fastfood';
+import GitHubIcon from "@mui/icons-material/GitHub";
+import HotelIcon from '@mui/icons-material/Hotel';
+import LaptopMacIcon from '@mui/icons-material/LaptopMac';
+import RepeatIcon from '@mui/icons-material/Repeat';
 import {Area, AreaChart, CartesianGrid, Legend, Line, LineChart, Tooltip, XAxis, YAxis} from 'recharts';
 import Footer from "../../components/Footer";
 
@@ -46,7 +44,7 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box p={3}>
+        <Box sx={{ p: 3 }}>
           <Typography>{children}</Typography>
         </Box>
       )}
@@ -60,30 +58,6 @@ function a11yProps(index) {
     'aria-controls': `simple-tabpanel-${index}`,
   };
 }
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-    minHeight: '100vh',
-  },
-  paper: {
-    padding: '6px 16px',
-  },
-  heroContent: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(8, 0, 6),
-  },
-  heroButtons: {
-    marginTop: theme.spacing(2),
-  },
-  cardGrid: {
-    paddingTop: theme.spacing(6),
-  },
-  cardMedia: {
-    paddingTop: '56.25%', // 16:9
-  },
-}));
 
 const data = [
   {
@@ -100,7 +74,7 @@ const data = [
     "title": "v0.1.0",
     "content": "基本框架搭建完成",
     "color": "primary",
-    "variant": "default"
+    "variant": "filled"
   },
   {
     "time": "2020.4.11",
@@ -108,7 +82,7 @@ const data = [
     "title": "v0.2.0",
     "content": "大量bug修复",
     "color": "primary",
-    "variant": "default"
+    "variant": "filled"
   },
   {
     "time": "2020.7.19",
@@ -116,7 +90,7 @@ const data = [
     "title": "v0.3.0",
     "content": "支持语句粒度的血缘输出，生产可用",
     "color": "primary",
-    "variant": "default"
+    "variant": "filled"
   },
   {
     "time": "2020.8.6",
@@ -124,7 +98,7 @@ const data = [
     "title": "社区动态",
     "content": "首次收到用户邮件联络",
     "color": "secondary",
-    "variant": "default"
+    "variant": "filled"
   },
   {
     "time": "2020.8.29",
@@ -132,7 +106,7 @@ const data = [
     "title": "v0.4.0",
     "content": "基于DAG的血缘表示及可视化",
     "color": "primary",
-    "variant": "default"
+    "variant": "filled"
   },
   {
     "time": "2020.9.27",
@@ -140,7 +114,7 @@ const data = [
     "title": "v1.0.0",
     "content": "readthedocs托管文档，正式发布v1.0版本",
     "color": "primary",
-    "variant": "default"
+    "variant": "filled"
   },
   {
     "time": "2020.11.3",
@@ -148,7 +122,7 @@ const data = [
     "title": "社区动态",
     "content": "首次收到用户ISSUE",
     "color": "secondary",
-    "variant": "default"
+    "variant": "filled"
   },
   {
     "time": "2020.11.13",
@@ -156,7 +130,7 @@ const data = [
     "title": "社区动态",
     "content": "首次收到用户PR",
     "color": "secondary",
-    "variant": "default"
+    "variant": "filled"
   },
   {
     "time": "2021.1.17",
@@ -164,7 +138,7 @@ const data = [
     "title": "v1.1.0",
     "content": "基于JavaScript的可视化方案",
     "color": "primary",
-    "variant": "default"
+    "variant": "filled"
   },
   {
     "time": "2021.4.18",
@@ -172,7 +146,7 @@ const data = [
     "title": "v1.2.0",
     "content": "功能完备的前端界面",
     "color": "primary",
-    "variant": "default"
+    "variant": "filled"
   },
   {
     "time": "2021.10.20",
@@ -180,7 +154,7 @@ const data = [
     "title": "社区动态",
     "content": "GitHub Star数达到100",
     "color": "secondary",
-    "variant": "default"
+    "variant": "filled"
   },
   {
     "time": "2021.11.13",
@@ -188,7 +162,7 @@ const data = [
     "title": "v1.3.0",
     "content": "字段级血缘解析",
     "color": "primary",
-    "variant": "default"
+    "variant": "filled"
   },
   {
     "time": "2021.12.01",
@@ -196,7 +170,7 @@ const data = [
     "title": "社区动态",
     "content": "SQLLineage入选PyCoder's Weekly邮件订阅，单日收获17个Star",
     "color": "secondary",
-    "variant": "default"
+    "variant": "filled"
   },
   {
     "time": "2021.12.10",
@@ -204,7 +178,7 @@ const data = [
     "title": "社区动态",
     "content": "单日下载1006次，首次突破1000+",
     "color": "secondary",
-    "variant": "default"
+    "variant": "filled"
   },
   {
     "time": "2021.5.17",
@@ -212,7 +186,7 @@ const data = [
     "title": "社区动态",
     "content": "单日下载8019次，首次突破5000+",
     "color": "secondary",
-    "variant": "default"
+    "variant": "filled"
   },
   {
     "time": "2021.6.3",
@@ -220,7 +194,7 @@ const data = [
     "title": "社区动态",
     "content": "GitHub Star数达到300",
     "color": "secondary",
-    "variant": "default"
+    "variant": "filled"
   },
 ]
 
@@ -245,7 +219,6 @@ const cards = [
 
 
 const SQLLineagePage = () => {
-  const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const [download, setDownload] = React.useState(0);
   const [downloadDaily, setDownloadDaily] = React.useState(0);
@@ -317,7 +290,11 @@ const SQLLineagePage = () => {
   };
 
   return (
-    <div className={classes.root}>
+    <Box sx={{
+      display: 'flex',
+      flexDirection: 'column',
+      minHeight: '100vh'
+    }}>
       <CssBaseline/>
       <AppBar position="static">
         <Toolbar>
@@ -330,19 +307,29 @@ const SQLLineagePage = () => {
             <Typography variant="h6" noWrap>
               SQLLineage
             </Typography>
-            <Tabs value={value} onChange={handleChange} aria-label="simple tabs example" centered>
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              aria-label="simple tabs example"
+              centered
+              textColor="default"
+              indicatorColor="secondary"
+            >
               <Tab label="项目介绍" {...a11yProps(0)} />
               <Tab label="仪表盘" {...a11yProps(1)} />
               <Tab label="里程碑" {...a11yProps(2)} />
             </Tabs>
-            <Link href="https://github.com/reata/sqllineage" color="inherit">
+            <Link
+              href="https://github.com/reata/sqllineage"
+              color="inherit"
+              underline="hover">
               <GitHubIcon/>
             </Link>
           </Grid>
         </Toolbar>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <div className={classes.heroContent}>
+        <Box sx={{paddingTop: 8, paddingBottom: 6}}>
           <Container maxWidth="sm">
             <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
               SQLLineage
@@ -351,7 +338,7 @@ const SQLLineagePage = () => {
               SQLLineage是一个基于Python的SQL血缘分析工具。
               这个包可以方便地分析任意SQL的输入表、输出表，并提供UI可视化。免除你从头开始研究SQL解析的烦恼。
             </Typography>
-            <div className={classes.heroButtons}>
+            <Box sx={{marginTop: 2}}>
               <Grid container spacing={2} justifyContent="center">
                 <Grid item>
                   <Button variant="contained" color="primary" href="https://sqllineage.herokuapp.com/">
@@ -364,16 +351,16 @@ const SQLLineagePage = () => {
                   </Button>
                 </Grid>
               </Grid>
-            </div>
+            </Box>
           </Container>
-          <Container className={classes.cardGrid} maxWidth="md">
+          <Container sx={{paddingTop: 6}} maxWidth="md">
             {/* End hero unit */}
             <Grid container spacing={4}>
               {cards.map((card, idx) => (
                 <Grid item key={idx} xs={12} sm={6} md={4}>
                   <Card>
                     <CardMedia
-                      className={classes.cardMedia}
+                      sx={{paddingTop: '56.25%'}} // 16:9
                       image={card.image}
                       title={card.title}
                     />
@@ -390,7 +377,7 @@ const SQLLineagePage = () => {
               ))}
             </Grid>
           </Container>
-        </div>
+        </Box>
 
 
       </TabPanel>
@@ -437,7 +424,7 @@ const SQLLineagePage = () => {
           ))}
         </Grid>
 
-        <Grid container justify="center" className={classes.paper}>
+        <Grid container justifyContent="center">
           <Typography variant="h5">
             PyPI下载趋势
           </Typography>
@@ -462,7 +449,7 @@ const SQLLineagePage = () => {
           </LineChart>
         </Grid>
 
-        <Grid container justify="center" className={classes.paper}>
+        <Grid container justifyContent="center">
           <Typography variant="h5">
             GitHub Star趋势
           </Typography>
@@ -485,9 +472,13 @@ const SQLLineagePage = () => {
         </Grid>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <Timeline align="alternate">
+        <Timeline position="alternate">
           {data.map(item => {
-            return <TimelineItem>
+            return <TimelineItem
+              align="right"
+              variant="body2"
+              color="text.secondary"
+            >
               <TimelineOppositeContent>
                 <Typography variant="body2" color="textSecondary">
                   {item.time}
@@ -500,12 +491,10 @@ const SQLLineagePage = () => {
                 <TimelineConnector/>
               </TimelineSeparator>
               <TimelineContent>
-                <Paper elevation={3} className={classes.paper}>
-                  <Typography variant="h6" component="h1">
-                    {item.title}
-                  </Typography>
-                  <Typography>{item.content}</Typography>
-                </Paper>
+                <Typography variant="h5" component="span">
+                  {item.title}
+                </Typography>
+                <Typography variant="subtitle1">{item.content}</Typography>
               </TimelineContent>
             </TimelineItem>
           })}
@@ -516,18 +505,16 @@ const SQLLineagePage = () => {
               </TimelineDot>
             </TimelineSeparator>
             <TimelineContent>
-              <Paper elevation={3} className={classes.paper}>
-                <Typography variant="h6" component="h1">
+                <Typography variant="h5" component="span">
                   未完待续
                 </Typography>
                 <Typography>求知若饥，虚心若愚</Typography>
-              </Paper>
             </TimelineContent>
           </TimelineItem>
         </Timeline>
       </TabPanel>
       <Footer/>
-    </div>
+    </Box>
   );
 }
 
