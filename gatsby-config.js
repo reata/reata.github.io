@@ -294,7 +294,11 @@ module.exports = {
       {
         title: "SQL中JOIN时，过滤条件写在ON里和写在WHERE条件里，二者等价吗？",
         link: "https://gist.github.com/reata/f00d3d4c0066d5e7c7a01351dd56c9c1"
-      }
+      },
+      {
+        title: "SELECT DISTINCT和GROUP BY的去重效果相同吗？",
+        link: "https://gist.github.com/reata/fd5e8cc15f55c3ec1ba0a3d7511d7991"
+      },
     ]
   },
   plugins: [
