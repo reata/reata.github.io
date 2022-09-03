@@ -304,6 +304,10 @@ module.exports = {
         link: "https://gist.github.com/reata/5bfeecb9a7f41be46bbb546e44f644f4"
       },
       {
+        title: "用多线程代码解释分布式JOIN策略：BroadcastHashJoin, ShuffleHashJoin, ShuffleSortMergeJoin & BroadcastNestedLoopJoin",
+        link: "https://gist.github.com/reata/f0c2bc35430fdde23289c7135c1e6da3"
+      },
+      {
         title: "SQL中JOIN时，过滤条件写在ON里和写在WHERE条件里，二者等价吗？",
         link: "https://gist.github.com/reata/f00d3d4c0066d5e7c7a01351dd56c9c1"
       },
