@@ -18,7 +18,7 @@ v1.0版本针各类SQL语句做了充分的测试，就表级血缘这一功能�
 - v1.1版本的迭代，将血缘可视化，由matplotlib+graphviz的服务端绘图方案，切换为基于Cytoscape.js的客户端绘图方案。交互性更强的同时，也摆脱了对graphviz的依赖。
   Windows下安装C Library及其Python binding并不那么容易，之前经常有用户抱怨pygraphviz安装不上。移除之后，兼容性的问题也就同步解决了。
 
-- v1.2版本，随着React+MaterialUI的引入，SQLLineage成为了一个独立的Web App，我在Heroku上部署了一个[DEMO](https://sqllineage.herokuapp.com/)站点，这样即使没有Python背景的人，
+- v1.2版本，随着React+MaterialUI的引入，SQLLineage成为了一个独立的Web App，我部署了一个[DEMO](https://reata.github.io/sqllineage/)站点，这样即使没有Python背景的人，
   也可以使用SQLLineage了，进一步增强了易用性。（关于在Python Package里发布前端代码，感兴趣可以看[这篇博客](https://reata.github.io/blog/build-frontend-bundle-in-a-python-package/)）
 
 就我个人的想法，做到这个阶段，是到了事了拂衣去的时候了。

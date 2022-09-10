@@ -127,7 +127,7 @@ result.draw()
 
 SQLLineage目前已经发布v1.0版本，进入稳定可用状态，让我一起来探索SQL血缘吧！
 
-（2022.3，作者按：从v1.2.2版本起，SQLLineage可以部署为一个Web App，欢迎访问这个[DEMO](https://sqllineage.herokuapp.com/)）
+（2022.3，作者按：从v1.2.2版本起，SQLLineage可以部署为一个Web App，欢迎访问这个[DEMO](https://reata.github.io/sqllineage/)）
 
 
 ## 相关链接

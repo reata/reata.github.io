@@ -351,7 +351,7 @@ const SQLLineagePage = () => {
             <Box sx={{marginTop: 2}}>
               <Grid container spacing={2} justifyContent="center">
                 <Grid item>
-                  <Button variant="contained" color="primary" href="https://sqllineage.herokuapp.com/">
+                  <Button variant="contained" color="primary" href="https://reata.github.io/sqllineage/">
                     Demo
                   </Button>
                 </Grid>
