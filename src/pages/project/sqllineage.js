@@ -196,6 +196,14 @@ const data = [
     "color": "secondary",
     "variant": "filled"
   },
+  {
+    "time": "2021.9.1",
+    "icon": RepeatIcon,
+    "title": "社区动态",
+    "content": "SQLLineage入选PyPI critical project",
+    "color": "secondary",
+    "variant": "filled"
+  },
 ]
 
 const cards = [
