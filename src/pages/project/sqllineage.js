@@ -225,6 +225,8 @@ const cards = [
   },
 ];
 
+const backend_api = "https://sqllineage.azurewebsites.net"
+
 
 const SQLLineagePage = () => {
   const [value, setValue] = React.useState(0);
@@ -238,7 +240,7 @@ const SQLLineagePage = () => {
   const [openIssues, setOpenIssues] = React.useState(0);
 
   useEffect(() => {
-    fetch("https://magpie-bridge.herokuapp.com/api/pypistats/api/packages/sqllineage/recent")
+    fetch(`${backend_api}/api/pypistats/api/packages/sqllineage/recent`)
       .then(res => res.json())
       .then(
         (result) => {
@@ -250,7 +252,7 @@ const SQLLineagePage = () => {
           console.log(error)
         }
       )
-    fetch("https://magpie-bridge.herokuapp.com/api/pypistats/api/packages/sqllineage/overall")
+    fetch(`${backend_api}/api/pypistats/api/packages/sqllineage/overall`)
       .then(res => res.json())
       .then(
         (result) => {
@@ -269,7 +271,7 @@ const SQLLineagePage = () => {
           console.log(error)
         }
       )
-    fetch("https://magpie-bridge.herokuapp.com/api/github/repos/reata/sqllineage")
+    fetch(`${backend_api}/api/github/repos/reata/sqllineage`)
       .then(res => res.json())
       .then(
         (result) => {
@@ -281,7 +283,7 @@ const SQLLineagePage = () => {
           console.log(error)
         }
       )
-    fetch("https://magpie-bridge.herokuapp.com/api/starhistory/reata/sqllineage")
+    fetch(`${backend_api}/api/starhistory/reata/sqllineage`)
       .then(res => res.json())
       .then(
         (result) => {
