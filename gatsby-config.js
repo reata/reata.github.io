@@ -315,6 +315,10 @@ module.exports = {
         title: "SELECT DISTINCT和GROUP BY的去重效果相同吗？",
         link: "https://gist.github.com/reata/fd5e8cc15f55c3ec1ba0a3d7511d7991"
       },
+      {
+        title: "Spark的INSERT OVERWRITE幂等吗？",
+        link: "https://gist.github.com/reata/f56ca53797e8a7f5214db6dc2c7f8fec"
+      },
     ]
   },
   plugins: [
