@@ -288,6 +288,10 @@ module.exports = {
         link: "https://gist.github.com/reata/39684356cbcbdc14d94b9fc9a1db8d8c"
       },
       {
+        title: "在Python中用[]和list()创建列表有区别吗？",
+        link: "https://gist.github.com/reata/5d0fee871252031d44f025b9aeba0a0b"
+      },
+      {
         title: "在Python中查询MySQL是CPU密集型还是IO密集型任务，能用多线程来加速吗？",
         link: "https://gist.github.com/reata/7894016938bc4110bb5516cdd87fe1a0"
       },
