@@ -158,10 +158,26 @@ python test.py > test.log &
 tail -f test.log
 ```
 
-不加flush不用logging，当我们查看日志时，可以完全复现在平台中的行为。仅有当该Python进程完成，日志文件中才会一次出现所有内容。
+不加flush不用logging，当我们查看日志时，可以完全复现在平台中的行为：即仅当该Python进程完成，日志文件中才会一次出现所有内容。
 
 这个行为，记录在Python的[官方文档](https://docs.python.org/3/library/sys.html#sys.stdout)中：
 
 > When interactive, the stdout stream is line-buffered. Otherwise, it is block-buffered like regular text > files. The stderr stream is line-buffered in both cases. You can make both streams unbuffered by passing > the -u command-line option or setting the PYTHONUNBUFFERED environment variable.
 
 这样就清楚了，在命令行中交互执行（前台执行）时，stdout是按行缓冲的。也就是说，每一行结束，都会自动flush。而当后台执行时，就和正常写文件一样，按块缓冲了。操作系统块肯定远大于我们打印的9个数字的长度，缓冲池没有满，日志自然不会被打印出来了。
+
+参照文档里描述的，我们通过增加-u选项：
+
+```python
+python -u test.py > test.log &
+tail -f test.log
+```
+
+或者设置PYTHONUNBUFFERED环境变量：
+
+```python
+PYTHONUNBUFFERED=1 python test.py > test.log &
+tail -f test.log
+```
+
+二者都可以在没有flush的情况下，将日志实时打印出来。
