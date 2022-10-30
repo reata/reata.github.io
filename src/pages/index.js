@@ -1,5 +1,4 @@
 import React from 'react';
-import CssBaseline from '@mui/material/CssBaseline';
 import { Container, Divider, Grid } from "@mui/material";
 import Section from "../components/Section";
 import MainFeaturedPost from "../components/MainFeaturedPost";
@@ -8,7 +7,6 @@ import Post from "../components/Post";
 import Sidebar from "../components/Sidebar";
 import Footer from "../components/Footer";
 import {graphql} from "gatsby";
-import Header from "../components/Header";
 import readingTime from "../utils/readingTime";
 
 
@@ -23,8 +21,6 @@ const IndexPage = ({data}) => {
 
   return (
     <React.Fragment>
-      <Header/>
-      <CssBaseline/>
       <Container maxWidth="lg">
         <Section/>
         <main>

@@ -1,11 +1,11 @@
 import React from 'react';
-import {Chip, Toolbar} from '@mui/material';
+import {Chip, Toolbar, Typography} from '@mui/material';
 
 
 const sections = [
   {title: 'Blog', url: '/'},
-  {title: 'Notebook', url: '/notebook'},
   {title: 'Gist', url: '/gist'},
+  {title: 'Notebook', url: '/notebook'},
   {title: 'About', url: '/about'},
 ];
 
@@ -18,7 +18,9 @@ export default function Section() {
         overflowX: 'auto',
       }}>
         {sections.map((section) => (
-          <Chip label={section.title} component="a" href={section.url} clickable/>
+          <Chip label={<Typography variant="subtitle2" gutterBottom={true}>
+            {section.title}
+          </Typography>} component="a" href={section.url} clickable/>
         ))}
       </Toolbar>
     </React.Fragment>

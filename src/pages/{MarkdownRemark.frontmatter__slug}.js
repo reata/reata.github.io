@@ -1,12 +1,10 @@
 import React from "react"
 import {graphql} from "gatsby"
-import CssBaseline from "@mui/material/CssBaseline";
 import { Box, Container, Grid, Paper } from "@mui/material";
 import { styled } from '@mui/material/styles';
 import Section from "../components/Section";
 import Footer from "../components/Footer";
 import {GatsbyImage, getImage} from "gatsby-plugin-image";
-import Header from "../components/Header";
 import readingTime from "../utils/readingTime";
 
 // A huge thanks for Project medium.css: https://github.com/lucagez/medium.css
@@ -53,8 +51,6 @@ export default function Template({data}) {
 
   return (
     <React.Fragment>
-      <Header/>
-      <CssBaseline/>
       <Container maxWidth="lg">
         <Section/>
         <main>

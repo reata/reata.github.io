@@ -1,27 +1,23 @@
 import React from 'react';
 import {graphql} from 'gatsby'
-import CssBaseline from '@mui/material/CssBaseline';
 import { Container, Grid, List, ListItem, ListItemIcon, ListItemText, ListSubheader } from "@mui/material";
 import LinkIcon from '@mui/icons-material/Link';
 import Section from "../components/Section";
 import Footer from "../components/Footer";
 import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
-import Header from "../components/Header";
 
 
 const NotebookPage = ({data}) => {
 
   return (
     <React.Fragment>
-      <Header/>
-      <CssBaseline/>
       <Container maxWidth="lg">
         <Section/>
         <main>
           <Grid container justifyContent="center" alignItems="center" sx={{marginTop: 3}}>
             <Typography variant="h4" gutterBottom={true}>
-              以Jupyter Notebook记录的学习笔记
+              学习笔记 via Jupyter Notebook
             </Typography>
             {data.site.siteMetadata.notebooks.map(notebook => {
               return <Container>

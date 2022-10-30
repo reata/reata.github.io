@@ -1,9 +1,7 @@
 import React from 'react';
-import CssBaseline from '@mui/material/CssBaseline';
 import { Box, Container, Grid, Link, ListItem, ListItemIcon, ListItemText, Typography } from "@mui/material";
 import Section from "../components/Section";
 import Footer from "../components/Footer";
-import Header from "../components/Header";
 import LinkIcon from "@mui/icons-material/Link";
 
 
@@ -15,8 +13,6 @@ const AboutPage = () => {
       flexDirection: 'column',
       minHeight: '100vh'
     }}>
-      <Header/>
-      <CssBaseline/>
       <Container maxWidth="lg">
         <Section/>
         <main>
