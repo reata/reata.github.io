@@ -8,8 +8,12 @@ import {
   CardMedia,
   Container,
   CssBaseline,
+  FormControl,
   Grid,
+  InputLabel,
   Link,
+  MenuItem,
+  Select,
   Tab,
   Tabs,
   Toolbar,
@@ -44,7 +48,7 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box sx={{ p: 3 }}>
+        <Box sx={{p: 3}}>
           <Typography>{children}</Typography>
         </Box>
       )}
@@ -234,6 +238,8 @@ const SQLLineagePage = () => {
   const [downloadDaily, setDownloadDaily] = React.useState(0);
   const [downloadWeekly, setDownloadWeekly] = React.useState(0);
   const [downloadTrend, setDownloadTrend] = React.useState([]);
+  const [dimensionAttribute, setDimensionAttribute] = React.useState({});
+  const [dimension, setDimension] = React.useState("overall");
   const [star, setStar] = React.useState(0);
   const [starTrend, setStarTrend] = React.useState([]);
   const [fork, setFork] = React.useState(0);
@@ -247,25 +253,6 @@ const SQLLineagePage = () => {
           setDownload(result.data.last_month);
           setDownloadWeekly(result.data.last_week);
           setDownloadDaily(result.data.last_day)
-        },
-        (error) => {
-          console.log(error)
-        }
-      )
-    fetch(`${backend_api}/api/pypistats/api/packages/sqllineage/overall`)
-      .then(res => res.json())
-      .then(
-        (result) => {
-          let date_cnt = result.data.length / 2;
-          let trend = []
-          for (let i = 0; i < date_cnt; i++) {
-            trend.push({
-              "name": result.data[i].date.slice(5, 10),
-              "With_Mirrors": result.data[i].downloads,
-              "Without_Mirrors": result.data[date_cnt + i].downloads
-            })
-          }
-          setDownloadTrend(trend)
         },
         (error) => {
           console.log(error)
@@ -295,9 +282,50 @@ const SQLLineagePage = () => {
       )
   }, [])
 
+  useEffect(() => {
+    fetch(`${backend_api}/api/pypistats/api/packages/sqllineage/${dimension}`)
+      .then(res => res.json())
+      .then(
+        (result) => {
+          let categories = {};
+          let date_to_cnt = {};
+          for (let i = 0; i < result.data.length; i++) {
+            let data = result.data[i];
+            categories[data.category] = false;
+            let date = data.date.slice(5, 10);
+            if (!date_to_cnt.hasOwnProperty(date)) {
+              date_to_cnt[date] = {}
+            }
+            date_to_cnt[date][data.category] = data.downloads
+          }
+          let trend = []
+          for (const key of Object.keys(date_to_cnt).sort()) {
+            let value = date_to_cnt[key]
+            value["name"] = key;
+            trend.push(value)
+          }
+          setDimensionAttribute(categories)
+          setDownloadTrend(trend)
+        },
+        (error) => {
+          console.log(error)
+        }
+      )
+  }, [dimension])
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  const handleSelect = (event) => {
+    setDimension(event.target.value);
+  };
+
+  const selectCategory = (event) => {
+    let category = {...dimensionAttribute};
+    category[event.value] = !category[event.value]
+    setDimensionAttribute(category)
+  }
 
   return (
     <Box sx={{
@@ -433,11 +461,31 @@ const SQLLineagePage = () => {
             </Grid>
           ))}
         </Grid>
+        <Grid container justifyContent="center" sx={{paddingTop: 2, paddingBottom: 1}}>
+          <Grid container justifyContent="space-between">
+            <Grid item xs={1}>
+            </Grid>
+            <Grid item>
+              <Typography variant="h5">
+                PyPI下载趋势
+              </Typography>
+            </Grid>
+            <Grid item xs={1}>
+              <FormControl fullWidth>
+                <InputLabel>分类</InputLabel>
+                <Select
+                  value={dimension}
+                  label="Compare By"
+                  onChange={handleSelect}
+                >
+                  <MenuItem value={"overall"}>总体趋势</MenuItem>
+                  <MenuItem value={"python_minor"}>Python版本</MenuItem>
+                  <MenuItem value={"system"}>操作系统</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
+          </Grid>
 
-        <Grid container justifyContent="center">
-          <Typography variant="h5">
-            PyPI下载趋势
-          </Typography>
           <LineChart
             width={1800}
             height={300}
@@ -450,12 +498,31 @@ const SQLLineagePage = () => {
             }}
           >
             <CartesianGrid strokeDasharray="3 3"/>
-            <XAxis dataKey="name" minTickGap={20} />
+            <XAxis dataKey="name" minTickGap={20}/>
             <YAxis/>
             <Tooltip/>
-            <Legend/>
-            <Line type="monotone" dataKey="With_Mirrors" stroke="#ea8f74" activeDot={{r: 8}}/>
-            <Line type="monotone" dataKey="Without_Mirrors" stroke="#00516c"/>
+            <Legend
+              onClick={selectCategory}
+            />
+            {Object.entries(dimensionAttribute).map((category) => {
+              let stroke = {
+                with_mirrors: "#ea8f74",
+                without_mirrors: "#00516c",
+                "2.7": "#0497a0",
+                "3.5": "#32c1d2",
+                "3.6": "#f05a40",
+                "3.7": "#ea8f74",
+                "3.8": "#00516c",
+                "3.9": "#993f4e",
+                "3.10": "#076ea0",
+                "3.11": "#e0b163",
+                Linux: "#00516c",
+                Darwin: "#ea8f74",
+                Windows: "#993f4e",
+                null: "#a6a8aa",
+              }
+              return <Line type="monotone" dataKey={category[0]} stroke={stroke[category[0]]} hide={category[1]}/>
+            })}
           </LineChart>
         </Grid>
 
@@ -475,7 +542,7 @@ const SQLLineagePage = () => {
             }}
           >
             <CartesianGrid strokeDasharray="3 3"/>
-            <XAxis dataKey="date" minTickGap={50} />
+            <XAxis dataKey="date" minTickGap={50}/>
             <YAxis/>
             <Area type="monotone" dataKey="star_cum_cnt" stroke="#00516c"/>
           </AreaChart>
@@ -515,10 +582,10 @@ const SQLLineagePage = () => {
               </TimelineDot>
             </TimelineSeparator>
             <TimelineContent>
-                <Typography variant="h5" component="span">
-                  未完待续
-                </Typography>
-                <Typography>求知若饥，虚心若愚</Typography>
+              <Typography variant="h5" component="span">
+                未完待续
+              </Typography>
+              <Typography>求知若饥，虚心若愚</Typography>
             </TimelineContent>
           </TimelineItem>
         </Timeline>
