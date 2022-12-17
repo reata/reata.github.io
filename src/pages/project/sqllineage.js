@@ -185,7 +185,7 @@ const data = [
     "variant": "filled"
   },
   {
-    "time": "2021.5.17",
+    "time": "2022.5.17",
     "icon": RepeatIcon,
     "title": "社区动态",
     "content": "单日下载8019次，首次突破5000+",
@@ -193,7 +193,7 @@ const data = [
     "variant": "filled"
   },
   {
-    "time": "2021.6.3",
+    "time": "2022.6.3",
     "icon": RepeatIcon,
     "title": "社区动态",
     "content": "GitHub Star数达到300",
@@ -201,10 +201,18 @@ const data = [
     "variant": "filled"
   },
   {
-    "time": "2021.9.1",
+    "time": "2022.9.1",
     "icon": RepeatIcon,
     "title": "社区动态",
     "content": "SQLLineage入选PyPI critical project",
+    "color": "secondary",
+    "variant": "filled"
+  },
+  {
+    "time": "2022.10.25",
+    "icon": RepeatIcon,
+    "title": "社区动态",
+    "content": "单日下载10065次，首次突破10000+",
     "color": "secondary",
     "variant": "filled"
   },
