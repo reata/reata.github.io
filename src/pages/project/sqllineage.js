@@ -300,7 +300,7 @@ const SQLLineagePage = () => {
           for (let i = 0; i < result.data.length; i++) {
             let data = result.data[i];
             categories[data.category] = false;
-            let date = data.date.slice(5, 10);
+            let date = data.date;
             if (!date_to_cnt.hasOwnProperty(date)) {
               date_to_cnt[date] = {}
             }
@@ -309,7 +309,7 @@ const SQLLineagePage = () => {
           let trend = []
           for (const key of Object.keys(date_to_cnt).sort()) {
             let value = date_to_cnt[key]
-            value["name"] = key;
+            value["name"] = key.slice(5, 10);
             trend.push(value)
           }
           setDimensionAttribute(categories)
