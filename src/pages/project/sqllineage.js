@@ -193,14 +193,6 @@ const data = [
     "variant": "filled"
   },
   {
-    "time": "2022.6.3",
-    "icon": RepeatIcon,
-    "title": "社区动态",
-    "content": "GitHub Star数达到300",
-    "color": "secondary",
-    "variant": "filled"
-  },
-  {
     "time": "2022.9.1",
     "icon": RepeatIcon,
     "title": "社区动态",
@@ -213,6 +205,14 @@ const data = [
     "icon": RepeatIcon,
     "title": "社区动态",
     "content": "单日下载10065次，首次突破10000+",
+    "color": "secondary",
+    "variant": "filled"
+  },
+  {
+    "time": "2022.12.25",
+    "icon": RepeatIcon,
+    "title": "社区动态",
+    "content": "GitHub Star数达到500",
     "color": "secondary",
     "variant": "filled"
   },
