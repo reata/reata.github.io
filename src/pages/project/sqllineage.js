@@ -216,6 +216,14 @@ const data = [
     "color": "secondary",
     "variant": "filled"
   },
+  {
+    "time": "2023.03.31",
+    "icon": LaptopMacIcon,
+    "title": "v1.4.0",
+    "content": "多SQL方言支持",
+    "color": "primary",
+    "variant": "filled"
+  },
 ]
 
 const cards = [
