@@ -21,7 +21,7 @@
     "@mui/icons-material": "^5.8.3",
     "@mui/lab": "^5.0.0-alpha.85",
     "@mui/material": "^5.8.3",
-    "gatsby": "^4.25.4",
+    "gatsby": "^4.25.7",
     "gatsby-legacy-polyfills": "^2.16.0",
     "gatsby-plugin-image": "^2.16.1",
     "gatsby-plugin-manifest": "^4.16.0",
