@@ -39,7 +39,7 @@
     "recharts": "^2.1.14"
   },
   "devDependencies": {
-    "gh-pages": "^4.0.0",
+    "gh-pages": "^5.0.0",
     "markdown-to-jsx": "^7.1.7"
   }
 }
