@@ -284,6 +284,10 @@ module.exports = {
     ],
     gists: [
       {
+        title: "任意的二进制数据都可以用UTF-8解码吗？",
+        link: "https://gist.github.com/reata/2eef6e514c70216c94ff0222aad0b2e4"
+      },
+      {
         title: "Python的条件表达式等价于if else代码块吗？",
         link: "https://gist.github.com/reata/39684356cbcbdc14d94b9fc9a1db8d8c"
       },
