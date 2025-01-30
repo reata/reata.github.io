@@ -40,6 +40,6 @@
   },
   "devDependencies": {
     "gh-pages": "^5.0.0",
-    "markdown-to-jsx": "^7.1.7"
+    "markdown-to-jsx": "^7.4.0"
   }
 }
