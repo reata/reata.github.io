@@ -1,6 +1,6 @@
 ---
 slug: "/blog/revisit-wsgi/"
-date: "2022-10-23"
+date: "2022-10-30"
 title: "再探WSGI"
 excerpt: "不用框架，写一个兼容WSGI的Python Web应用"
 image: "../images/wsgi.png"
