@@ -6,6 +6,7 @@ import Section from "../components/Section";
 import Footer from "../components/Footer";
 import {GatsbyImage, getImage} from "gatsby-plugin-image";
 import readingTime from "../utils/readingTime";
+import Giscus from "@giscus/react";
 
 // A huge thanks for Project medium.css: https://github.com/lucagez/medium.css
 const BlogContent = styled('div')(() => ({
@@ -94,6 +95,24 @@ export default function Template({data}) {
             <BlogContent>
               <Box dangerouslySetInnerHTML={{__html: html}}/>
             </BlogContent>
+          </Grid>
+          <Grid>
+            <Giscus
+                id="comment"
+                repo="reata/reata.github.io"
+                repoId="MDEwOlJlcG9zaXRvcnk3ODg0OTA1MQ=="
+                category="Announcements"
+                categoryId="DIC_kwDOBLMkG84Cq411"
+                mapping="pathname"
+                strict="0"
+                reactionsEnabled="0"
+                emitMetadata="0"
+                inputPosition="top"
+                theme="light"
+                lang="zh-CN"
+                loading="lazy"
+                async>
+            </Giscus>
           </Grid>
         </main>
       </Container>
