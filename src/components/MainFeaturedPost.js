@@ -25,21 +25,21 @@ export default function MainFeaturedPost(props) {
         backgroundColor: 'rgba(0,0,0,.3)'
       }}/>
       <Grid container>
-        <Grid item md={12}>
+        <Grid size={12}>
           <CardActionArea component="a" href={post.slug}>
             <Box sx={{
               position: 'relative',
               padding: 3,
             }}>
               <Typography component="h1" variant="h3" color="inherit" gutterBottom>
-                <Box fontWeight="fontWeightBold">
+                <Box sx={{ fontWeight: "bold" }}>
                   {post.title}
                 </Box>
               </Typography>
               <Typography variant="h6" color="inherit">
                 {post.excerpt}
               </Typography>
-              <Typography sx={{paddingTop: '30px'}} variant="body1" color="inherit" paragraph>
+              <Typography sx={{paddingTop: '30px', mb: 2}} variant="body1" color="inherit">
                 {post.date} · {post.readMinutes} min read
               </Typography>
             </Box>

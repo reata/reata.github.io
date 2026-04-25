@@ -1,5 +1,5 @@
 import React from 'react';
-import {Box, Container, Grid, List, ListItem, ListItemIcon, ListItemText} from "@mui/material";
+import {Box, Container, Grid, List, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
 import Section from "../components/Section";
 import Footer from "../components/Footer";
 import {graphql} from "gatsby";
@@ -17,18 +17,18 @@ const GistPage = ({data}) => {
       <Container maxWidth="lg">
         <Section/>
         <main>
-          <Grid container justifyContent="center" alignItems="center" sx={{marginTop: 3}}>
+          <Grid container sx={{ justifyContent: "center", alignItems: "center", marginTop: 3}}>
             <Typography variant="h4" gutterBottom={true}>
               代码拾遗 via Github Gist
             </Typography>
             <List>
               {data.site.siteMetadata.gists.map(gist => {
-                return <ListItem button component="a" href={gist.link} target="_blank">
+                return <ListItemButton component="a" href={gist.link} target="_blank">
                   <ListItemIcon>
                     <LinkIcon/>
                   </ListItemIcon>
                   <ListItemText primary={gist.title}/>
-                </ListItem>
+                </ListItemButton>
               })}
             </List>
           </Grid>

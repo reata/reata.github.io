@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Divider, Grid } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import Section from "../components/Section";
 import MainFeaturedPost from "../components/MainFeaturedPost";
 import FeaturedPost from "../components/FeaturedPost";
@@ -28,7 +28,6 @@ const IndexPage = ({data}) => {
           <FeaturedPost posts={featuredPosts}/>
           <Grid container spacing={5} sx={{marginTop: 3}}>
             <Post posts={otherPosts}/>
-            <Divider orientation="vertical" flexItem style={{marginRight: "-1px"}}/>
             <Sidebar/>
           </Grid>
         </main>

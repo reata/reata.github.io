@@ -1,6 +1,6 @@
 import React from 'react';
 import {graphql} from 'gatsby'
-import { Container, Grid, List, ListItem, ListItemIcon, ListItemText, ListSubheader } from "@mui/material";
+import { Container, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText, ListSubheader } from "@mui/material";
 import LinkIcon from '@mui/icons-material/Link';
 import Section from "../components/Section";
 import Footer from "../components/Footer";
@@ -15,7 +15,7 @@ const NotebookPage = ({data}) => {
       <Container maxWidth="lg">
         <Section/>
         <main>
-          <Grid container justifyContent="center" alignItems="center" sx={{marginTop: 3}}>
+          <Grid container sx={{ justifyContent: "center", alignItems: "center", marginTop: 3 }}>
             <Typography variant="h4" gutterBottom={true}>
               学习笔记 via Jupyter Notebook
             </Typography>
@@ -38,24 +38,24 @@ const NotebookPage = ({data}) => {
                         </ListItem>
                         <List component="div" disablePadding>
                           {child1.children.map((child2) => {
-                            return <ListItem sx={{paddingLeft: 4}} button component="a" href={child2.link}
+                            return <ListItemButton sx={{paddingLeft: 4}} component="a" href={child2.link}
                                              target="_blank">
                               <ListItemIcon>
                                 <LinkIcon/>
                               </ListItemIcon>
                               <ListItemText primary={child2.title}/>
-                            </ListItem>
+                            </ListItemButton>
                           })}
                         </List>
                       </Container>
                     } else {
-                      return <ListItem sx={{paddingLeft: 4}} button component="a" href={child1.link}
+                      return <ListItemButton sx={{paddingLeft: 4}} component="a" href={child1.link}
                                        target="_blank">
                         <ListItemIcon>
                           <LinkIcon/>
                         </ListItemIcon>
                         <ListItemText primary={child1.title}/>
-                      </ListItem>
+                      </ListItemButton>
                     }
                   })}
                 </List>

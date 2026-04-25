@@ -18,7 +18,7 @@ export default function Section() {
         overflowX: 'auto',
       }}>
         {sections.map((section) => (
-          <Chip label={<Typography variant="subtitle2" gutterBottom={true}>
+          <Chip key={section.title} label={<Typography variant="subtitle2" gutterBottom={true}>
             {section.title}
           </Typography>} component="a" href={section.url} clickable/>
         ))}

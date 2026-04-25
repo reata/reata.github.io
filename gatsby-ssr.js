@@ -1,12 +1,6 @@
 import React from "react";
 import { ThemeProvider, createTheme} from "@mui/material/styles";
-
 import {CssBaseline} from "@mui/material";
-import "@fontsource/roboto/300.css";
-import "@fontsource/roboto/400.css";
-import "@fontsource/roboto/500.css";
-import "@fontsource/roboto/700.css";
-require("prismjs/themes/prism-solarizedlight.css")
 
 const theme = createTheme();
 

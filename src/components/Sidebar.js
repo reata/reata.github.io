@@ -21,7 +21,7 @@ const social = [
 export default function Sidebar() {
 
   return (
-    <Grid item xs={12} md={4}>
+    <Grid size={{ xs: 12, md: 4 }}>
       <Paper sx={{padding: 2, backgroundColor: 'rgba(0,0,0,.03)'}}>
         <Avatar alt="Remy Sharp" src={bio_photo} sx={{
           width: 80,
@@ -41,14 +41,14 @@ export default function Sidebar() {
             variant="body1"
             color="inherit"
             href={network.link}
-            key={network}
+            key={network.name}
             target="_blank"
             underline="hover">
-            <Grid container direction="row" spacing={1} alignItems="center">
+            <Grid container spacing={1} sx={{ alignItems: "center" }}>
               <Grid item>
                 <network.icon/>
               </Grid>
-              <Grid item>{network.name}</Grid>
+              <Grid>{network.name}</Grid>
             </Grid>
           </Link>
         ))}

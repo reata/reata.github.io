@@ -351,55 +351,48 @@ const SQLLineagePage = () => {
     }}>
       <CssBaseline/>
       <AppBar position="static">
-        <Toolbar>
-          <Grid
-            container
-            direction="row"
-            justifyContent="space-between"
-            alignItems="center"
+        <Toolbar sx={{ justifyContent: "space-between" }}>
+          <Typography variant="h6" noWrap>
+            SQLLineage
+          </Typography>
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            aria-label="simple tabs example"
+            centered
+            textColor="inherit"
+            indicatorColor="secondary"
           >
-            <Typography variant="h6" noWrap>
-              SQLLineage
-            </Typography>
-            <Tabs
-              value={value}
-              onChange={handleChange}
-              aria-label="simple tabs example"
-              centered
-              textColor="default"
-              indicatorColor="secondary"
-            >
-              <Tab label="项目介绍" {...a11yProps(0)} />
-              <Tab label="仪表盘" {...a11yProps(1)} />
-              <Tab label="里程碑" {...a11yProps(2)} />
-            </Tabs>
-            <Link
-              href="https://github.com/reata/sqllineage"
-              color="inherit"
-              underline="hover">
-              <GitHubIcon/>
-            </Link>
-          </Grid>
+            <Tab label="项目介绍" {...a11yProps(0)} />
+            <Tab label="仪表盘" {...a11yProps(1)} />
+            <Tab label="里程碑" {...a11yProps(2)} />
+          </Tabs>
+          <Link
+            href="https://github.com/reata/sqllineage"
+            color="inherit"
+            underline="hover">
+            <GitHubIcon/>
+          </Link>
         </Toolbar>
       </AppBar>
       <TabPanel value={value} index={0}>
         <Box sx={{paddingTop: 8, paddingBottom: 6}}>
           <Container maxWidth="sm">
-            <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
+            <Typography component="h1" variant="h2" align="center" color="text.primary" gutterBottom>
               SQLLineage
             </Typography>
-            <Typography variant="h5" align="center" color="textSecondary" paragraph>
+            <Typography variant="h5" align="center" color="text.secondary" sx={{ mb: 2 }}>
               SQLLineage是一个基于Python的SQL血缘分析工具。
               这个包可以方便地分析任意SQL的输入表、输出表，并提供UI可视化。免除你从头开始研究SQL解析的烦恼。
             </Typography>
             <Box sx={{marginTop: 2}}>
-              <Grid container spacing={2} justifyContent="center">
-                <Grid item>
+              <Grid container spacing={2} sx={{ justifyContent: "center" }}>
+                <Grid>
                   <Button variant="contained" color="primary" href="https://reata.github.io/sqllineage/">
                     Demo
                   </Button>
                 </Grid>
-                <Grid item>
+                <Grid>
                   <Button variant="outlined" color="primary" href="https://pypi.org/project/sqllineage/">
                     安装
                   </Button>
@@ -411,7 +404,7 @@ const SQLLineagePage = () => {
             {/* End hero unit */}
             <Grid container spacing={4}>
               {cards.map((card, idx) => (
-                <Grid item key={idx} xs={12} sm={6} md={4}>
+                <Grid key={idx} size={{ xs: 12, sm: 6, md: 4}}>
                   <Card>
                     <CardMedia
                       sx={{paddingTop: '56.25%'}} // 16:9
@@ -463,7 +456,7 @@ const SQLLineagePage = () => {
               data: openIssues
             }
           ].map(card => (
-            <Grid item xs>
+            <Grid size="grow">
               <Card>
                 <CardContent>
                   <Typography component="h2" variant="h6" color="primary" gutterBottom>
@@ -477,16 +470,13 @@ const SQLLineagePage = () => {
             </Grid>
           ))}
         </Grid>
-        <Grid container justifyContent="center" sx={{paddingTop: 2, paddingBottom: 1}}>
-          <Grid container justifyContent="space-between">
-            <Grid item xs={1}>
-            </Grid>
-            <Grid item>
+        <Box sx={{paddingTop: 2, paddingBottom: 1}}>
+          <Box sx={{display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%", marginBottom: 2}}>
+            <Box sx={{ width: 120 }} />
               <Typography variant="h5">
                 PyPI下载趋势
               </Typography>
-            </Grid>
-            <Grid item xs={1}>
+            <Box sx={{ width: 120 }}>
               <FormControl fullWidth>
                 <InputLabel>分类</InputLabel>
                 <Select
@@ -499,50 +489,52 @@ const SQLLineagePage = () => {
                   <MenuItem value={"system"}>操作系统</MenuItem>
                 </Select>
               </FormControl>
-            </Grid>
-          </Grid>
+            </Box>
+          </Box>
 
-          <LineChart
-            width={1800}
-            height={300}
-            data={downloadTrend}
-            margin={{
-              top: 20,
-              right: 30,
-              left: 20,
-              bottom: 5,
-            }}
-          >
-            <CartesianGrid strokeDasharray="3 3"/>
-            <XAxis dataKey="name" minTickGap={20}/>
-            <YAxis/>
-            <Tooltip/>
-            <Legend
-              onClick={selectCategory}
-            />
-            {Object.entries(dimensionAttribute).map((category) => {
-              let stroke = {
-                with_mirrors: "#ea8f74",
-                without_mirrors: "#00516c",
-                "2.7": "#0497a0",
-                "3.5": "#32c1d2",
-                "3.6": "#f05a40",
-                "3.7": "#ea8f74",
-                "3.8": "#00516c",
-                "3.9": "#993f4e",
-                "3.10": "#076ea0",
-                "3.11": "#e0b163",
-                Linux: "#00516c",
-                Darwin: "#ea8f74",
-                Windows: "#993f4e",
-                null: "#a6a8aa",
-              }
-              return <Line type="monotone" dataKey={category[0]} stroke={stroke[category[0]]} hide={category[1]}/>
-            })}
-          </LineChart>
-        </Grid>
+          <Box sx={{display: "flex", justifyContent: "center"}}>
+            <LineChart
+              width={1800}
+              height={300}
+              data={downloadTrend}
+              margin={{
+                top: 20,
+                right: 30,
+                left: 20,
+                bottom: 5,
+              }}
+            >
+              <CartesianGrid strokeDasharray="3 3"/>
+              <XAxis dataKey="name" minTickGap={20}/>
+              <YAxis/>
+              <Tooltip/>
+              <Legend
+                onClick={selectCategory}
+              />
+              {Object.entries(dimensionAttribute).map((category) => {
+                let stroke = {
+                  with_mirrors: "#ea8f74",
+                  without_mirrors: "#00516c",
+                  "2.7": "#0497a0",
+                  "3.5": "#32c1d2",
+                  "3.6": "#f05a40",
+                  "3.7": "#ea8f74",
+                  "3.8": "#00516c",
+                  "3.9": "#993f4e",
+                  "3.10": "#076ea0",
+                  "3.11": "#e0b163",
+                  Linux: "#00516c",
+                  Darwin: "#ea8f74",
+                  Windows: "#993f4e",
+                  null: "#a6a8aa",
+                }
+                return <Line type="monotone" dataKey={category[0]} stroke={stroke[category[0]]} hide={category[1]}/>
+              })}
+            </LineChart>
+          </Box>
+        </Box>
 
-        <Grid container justifyContent="center">
+        <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
           <Typography variant="h5">
             GitHub Star趋势
           </Typography>
@@ -562,18 +554,14 @@ const SQLLineagePage = () => {
             <YAxis/>
             <Area type="monotone" dataKey="star_cum_cnt" stroke="#00516c"/>
           </AreaChart>
-        </Grid>
+        </Box>
       </TabPanel>
       <TabPanel value={value} index={2}>
         <Timeline position="alternate">
           {data.map(item => {
-            return <TimelineItem
-              align="right"
-              variant="body2"
-              color="text.secondary"
-            >
+            return <TimelineItem>
               <TimelineOppositeContent>
-                <Typography variant="body2" color="textSecondary">
+                <Typography variant="body2" color="text.secondary">
                   {item.time}
                 </Typography>
               </TimelineOppositeContent>
@@ -593,7 +581,7 @@ const SQLLineagePage = () => {
           })}
           <TimelineItem>
             <TimelineSeparator>
-              <TimelineDot color="inherit" variant="default">
+              <TimelineDot color="inherit" variant="filled">
                 <FastfoodIcon/>
               </TimelineDot>
             </TimelineSeparator>

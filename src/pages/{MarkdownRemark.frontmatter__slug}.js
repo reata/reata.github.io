@@ -56,7 +56,7 @@ export default function Template({data}) {
         <Section/>
         <main>
           <Grid container spacing={1} sx={{marginTop: 5, marginBottom: 5}}>
-            <Grid item xs={6}>
+            <Grid size={6}>
               <Box sx={{padding: '6 6 0 0'}}>
                 <h1 style={{
                   fontFamily: "Playfair Display",
@@ -85,13 +85,13 @@ export default function Template({data}) {
                 </Box>
               </Box>
             </Grid>
-            <Grid item xs={6}>
+            <Grid size={6}>
               <Paper>
                 <GatsbyImage alt="" image={getImage(frontmatter.image)}/>
               </Paper>
             </Grid>
           </Grid>
-          <Grid container justifyContent="center" alignItems="center">
+          <Grid container sx={{ justifyContent: "center", alignItems: "center" }}>
             <BlogContent>
               <Box dangerouslySetInnerHTML={{__html: html}}/>
             </BlogContent>
