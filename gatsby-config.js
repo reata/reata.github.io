@@ -394,6 +394,5 @@ module.exports = {
         crossOrigin: `use-credentials`,
       },
     },
-    `gatsby-plugin-meta-redirect` // make sure to put last in the array
   ],
 };
