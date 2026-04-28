@@ -22,7 +22,7 @@ HTTP1.1及之前的协议，都建立在请求-响应模型之上，所有的通
 
 订单模块的`ApiHandler`用来处理第三方支付平台的支付成功回调信息。在整个请求-响应过程中，通过DB操作，更新订单信息。HTTP请求结束之后，查询当前的订单信息，将该消息发送到报表模块所有的WebSocket客户端：
 
-``` python
+```python
 class ApiHandler(web.RequestHandler):
     """订单模块支付宝支付成功回调接口"""
 
@@ -53,7 +53,7 @@ class ApiHandler(web.RequestHandler):
 
 报表模块的`SocketHandler`接受浏览器发出的WebSocket连接请求，将发起连接的用户加入到`rpt_ws_cl`变量中，并查询订单模块的数据库获取当前数据作为初始值，发送给客户端。
 
-```python                
+```python
 class SocketHandler(websocket.WebSocketHandler):
     """报表模块websocket连接"""
 
@@ -98,7 +98,7 @@ class SocketHandler(websocket.WebSocketHandler):
 
 修改后的订单模块回调接口如下，请求结束后，不再去访问报表模块的WebSocket客户端列表，而是将消息直接发送到Redis：
 
-``` python
+```python
 class ApiHandler(web.RequestHandler):
     """订单中心支付宝支付成功回调接口"""
     redis_cli = redis.StrictRedis.from_url(REDIS_URI)
@@ -129,7 +129,7 @@ class ApiHandler(web.RequestHandler):
 
 报表模块的`SocketHandler`，则将WebSocket客户端列表变为自己的私有变量（我知道，在Python里没有真正的私有变量，两个下划线也不行，但你明白这个意思的，对吧），不和外部共享。redis_listener方法，最终以一个单独的线程启动。Websocket连接建立时，也不再需要查询订单模块的数据库，而是本地保存了最新的消息状态。
 
-```python                
+```python
 class SocketHandler(websocket.WebSocketHandler):
     """报表系统websocket连接"""
     redis_cli = redis.StrictRedis.from_url(REDIS_URI)

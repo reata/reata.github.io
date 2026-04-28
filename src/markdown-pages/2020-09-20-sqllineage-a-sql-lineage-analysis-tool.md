@@ -34,7 +34,7 @@ insert overwrite table table_foo
 select * from /* let's play with a comment */ table_bar;
 ```
 
-显然我会认为/*是表名，虽然人家不过是个注释。
+显然我会认为/\*是表名，虽然人家不过是个注释。
 
 再比如说我还可以写个恶趣味的SQL
 
@@ -57,7 +57,7 @@ AST抽象语法树这个东西我听的够多了，它到底是个啥呢？这�
 
 我希望这个工具尽量简单，有命令行的界面，同时作为一个Python Package发布，这样pip安装后也可以import到其他的项目中。这个简单的工具，不会去执行SQL，
 或者连接任何元数据系统（比如Hive metastore）。我只对代码进行静态分析。优点当然是简单，而劣势就是可能这个血缘解析只能完美地做到表级别的血缘，
-对于字段级别的血缘，假如有select *的情况，就会丢失信息。这也是我暂时没有做字段级别血缘的主要原因。
+对于字段级别的血缘，假如有select \*的情况，就会丢失信息。这也是我暂时没有做字段级别血缘的主要原因。
 
 （2022.3，作者按：字段级别的血缘已经有初步的支持啦，请看[SQLLineage v1.3：迈向字段血缘](/blog/sqllineage-towards-column-lineage/)）
 
@@ -76,6 +76,7 @@ sqlparse不进行语法校验，一方面这意味着有了更多SQL方言支持
 ## Show Me The Code
 
 sqllineage已经发布到了PyPI上，可以通过pip直接进行安装使用：
+
 ```bash
 $ pip install sqllineage
 # 安装完成之后，会自带一个sqllineage的命令行工具
@@ -88,9 +89,10 @@ Target Tables:
 ```
 
 安装后也可以在Python脚本中直接调用：
+
 ```python
 from sqllineage.runner import LineageRunner
-sql = """insert into db1.table11 select * from db2.table21 union select * from db2.table22; 
+sql = """insert into db1.table11 select * from db2.table21 union select * from db2.table22;
 insert into db3.table3 select * from db1.table11 join db1.table12;"""
 result = LineageRunner(sql)
 print(result)
@@ -106,31 +108,31 @@ print(result)
 #    db1.table11
 
 # 也可以直接获取各个源表
-for tbl in result.source_tables: 
+for tbl in result.source_tables:
     print(tbl)
 #db1.table12
 #db2.table21
 #db2.table22
 
 # 目标表当然也是可以的
-for tbl in result.target_tables: 
+for tbl in result.target_tables:
     print(tbl)
 # db3.table13
 
 # 甚至还可以调用matplotlib绘制血缘图
 result.draw()
 ```
+
 下面这样一张表级血缘图会自动弹出：
 
 ![sqllineage](../images/sqllineage.png)
-
 
 SQLLineage目前已经发布v1.0版本，进入稳定可用状态，让我一起来探索SQL血缘吧！
 
 （2022.3，作者按：从v1.2.2版本起，SQLLineage可以部署为一个Web App，欢迎访问这个[DEMO](https://reata.github.io/sqllineage/)）
 
-
 ## 相关链接
+
 - 代码：[https://github.com/reata/sqllineage](https://github.com/reata/sqllineage)
 - 文档：[https://sqllineage.readthedocs.io/](https://sqllineage.readthedocs.io/)
 - PyPI：[https://pypi.org/project/sqllineage/](https://pypi.org/project/sqllineage/)

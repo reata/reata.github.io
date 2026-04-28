@@ -14,6 +14,7 @@ DuckDB已经足够。更不必说使用DuckDB同时意味着原生就有了列�
 Smallpond将DuckDB引入了数据处理领域，和Spark来到了同一战场。这里面就有很多值得一探的地方了。
 
 ## Smallpond的编程API
+
 Smallpond有一套自己的DataFrame定义，针对DataFrame有map, filter, flat_map, repartition等等操作，所有操作都是惰性执行的，和Spark高度类似。
 每个DataFrame都包含一个logical plan，map/filter这些操作会生成一个新的DataFrame，持有一个变更过的logical plan。
 
@@ -83,7 +84,7 @@ self.optimized_plan = Optimizer(exclude_nodes=set(self.session._node_to_tasks.ke
 [Optimizer](https://github.com/deepseek-ai/smallpond/blob/v0.15.0/smallpond/logical/optimizer.py)目前只实现了
 visit_query_engine_node，也就是针对DuckDB的算子。
 
-```python
+````python
 def visit_query_engine_node(self, node: SqlEngineNode, depth: int) -> Node:
     # fuse consecutive SqlEngineNodes
     if len(node.input_deps) == 1 and isinstance(
@@ -111,7 +112,7 @@ def visit_query_engine_node(self, node: SqlEngineNode, depth: int) -> Node:
         ]
         return fused
     return self.generic_visit(node, depth)
-```
+````
 
 这里具体的优化逻辑是，如果连续两个算子都是sql算子，那么通过子查询的形式，将sql合并，两个算子变成一个算子，少调用一次DuckDB，算是一个非常直接易懂的优化规则。
 

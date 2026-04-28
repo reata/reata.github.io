@@ -34,6 +34,7 @@ tail -f test.log
 程序员的第一反应，肯定不是自己的锅。于是友好交流了一番，对方表示，平台上其他的bash和Java任务，输出到标准输出的内容，都是实时打印的。一直也有一些Python任务，但从来没有听说过这类问题。于是我分别测试了一下：
 
 Bash版本：
+
 ```bash
 for i in $(seq 0 9)
     do echo $i
@@ -42,6 +43,7 @@ done
 ```
 
 Java版本：
+
 ```java
 public class App {
     public static void main(String[] args) throws InterruptedException {
@@ -56,6 +58,7 @@ public class App {
 分别用如下命令，在该平台中执行，然后同样去tail日志文件。发现确实，这两段代码的日志是实时的。所以不存在平台启动子进程的时候，没有实时捕获子进程标准输出的问题。
 
 那么问题是出在Python身上了吗？
+
 ```bash
 sh test.sh
 java -jar App.jar
@@ -80,7 +83,6 @@ for i in range(10):
 这里我们降低了日志级别到DEBUG，以便INFO级别的信息可以打印出来。并且logging默认配置是打印到标准错误的，这里也改成了标准输出。执行后再去看日志文件中的信息，发现是实时打印出来的。换言之，切换到logging之后，平台可以捕获到我们脚本的标准输出了。
 
 print和logging，都是输出到stdout，区别在哪里呢？
-
 
 ## logging
 
@@ -123,7 +125,7 @@ logger完成[record的拼装](https://github.com/python/cpython/blob/3.10/Lib/lo
 def print(self, *args, sep=' ', end='\n', file=None): # known special case of print
     """
     print(value, ..., sep=' ', end='\n', file=sys.stdout, flush=False)
-    
+
     Prints the values to a stream, or to sys.stdout by default.
     Optional keyword arguments:
     file:  a file-like object (stream); defaults to the current sys.stdout.

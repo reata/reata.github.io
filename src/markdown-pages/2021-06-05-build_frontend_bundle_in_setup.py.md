@@ -9,6 +9,7 @@ image: "../images/npm-pip.png"
 ## 太长不看，说重点
 
 如果你有以下烦恼：
+
 1. 你希望做一个前后端分离的Python Web项目，后端只写REST接口，前端通过React或者Vue来开发
 2. 你希望部署的时候，前后端不分离。前端npm run build完的HTML/CSS/JavaScript静态文件，通过Python Web框架来Serve
 3. 部署时前后端不分离的一个重要原因，是因为你要做一个Python Package，通过setup.py来打包，最终打好的whl包可以发布到PyPI。
@@ -18,12 +19,12 @@ image: "../images/npm-pip.png"
 
 ## 业界趋势
 
-传统来说，Python世界的数据可视化方案可以分为两大流派。一派是科学计算阵营，以matplotlib为典型代表的服务端绘图方案：终端用户通常在Jupyter 
+传统来说，Python世界的数据可视化方案可以分为两大流派。一派是科学计算阵营，以matplotlib为典型代表的服务端绘图方案：终端用户通常在Jupyter
 Notebook中，编写短短几行Python代码即可获得图片形式的绘图结果。易用性的优势显而易见，开发人员和用户，都只需要了解Python即可。但与此同时，
 由于输出是图片，就无法实现比如悬停提示，拖拽变更等用户交互功能。
 
 与之对应的，另一派则是Web开发阵营，HTML/CSS/JavaScript的客户端绘图方案。这种方案具有天然的可交互优势，但长期以来，缺点也很明显，
-主流的Python Web框架所提供的视图层解决方案是HTML模板（比如[Django Template](https://docs.djangoproject.com/zh-hans/3.2/topics/templates/), 
+主流的Python Web框架所提供的视图层解决方案是HTML模板（比如[Django Template](https://docs.djangoproject.com/zh-hans/3.2/topics/templates/),
 Flask生态下常用的[Jinja2](https://jinja.palletsprojects.com/en/3.0.x/)）。所谓模板，可以简单认为就是字符串拼接，
 通过Python代码来动态传入变量，生成静态的HTML + CSS + JavaScript）。在这个过程中，生成的JavaScript配合模板渲染好的HTML，提供一定程度的用户交互。
 即便对于一个熟练的Python Web开发来说，整个过程也不可谓不别扭，毕竟交互的核心逻辑其实还是JavaScript来实现的。
@@ -40,6 +41,7 @@ Flask生态下常用的[Jinja2](https://jinja.palletsprojects.com/en/3.0.x/)）�
 
 在1.0版本的sqllineage中，血缘图可视化是通过matplotlib + graphviz来实现的。graphviz是一个C写的绘图库，但这里我没有用到其绘图功能，
 只是调用了一个dot函数，获得图的布局数据（简单说就是所有节点的坐标，每个点应该画在哪里），然后传回给matplotlib进行绘制。
+
 ```python
 def draw_lineage_graph(graph: DiGraph) -> None:
     try:
@@ -88,9 +90,11 @@ def draw_lineage_graph(graph: DiGraph) -> None:
         plt.gca().add_patch(arrow)
     plt.show()
 ```
+
 完整的代码参见[这里](https://github.com/reata/sqllineage/blob/v1.0.2/sqllineage/drawing.py) 。
 
 这个方案实现了我的初步需求，但也带来了一些制约，比如
+
 - graphviz是一个C库，在Windows上安装较为繁琐。经常有用户和我抱怨，pip install sqllineage已经成功了，但是绘图功能用不了。我看了之后，
   通常是graphviz本身没装成功，或者pygraphviz，这个Python调用C的绑定库安装没成功。
 - 当节点非常多非常密集的时候，用户没有办法手动介入去拖动来调整图的布局。
@@ -101,6 +105,7 @@ def draw_lineage_graph(graph: DiGraph) -> None:
 这个函数弹出matplotlib的绘图，如今改为调用Flask，启动一个Web服务。这个Web Server的根路径，用GET方法调用时，返回index.html。
 index.html，以及它关联的所有css和javascript文件，是通过前端npm run build打包出来的。用POST方法调用时，入参是SQL脚本的路径，
 则会返回JSON形式表示的DAG数据结构。
+
 ```python
 app = Flask(
     __name__,
@@ -136,6 +141,7 @@ def draw_lineage_graph(**kwargs) -> None:
     print(f" * SQLLineage Running on http://localhost:{port}/?{querystring}")
     app.run(port=port)
 ```
+
 完整的代码参见[这里](https://github.com/reata/sqllineage/blob/v1.1.4/sqllineage/drawing.py)。
 
 前端工程单独放在[sqllineagejs](https://github.com/reata/sqllineage/tree/v1.1.4/sqllineagejs) 这个目录下，
@@ -164,9 +170,11 @@ def draw_lineage_graph(**kwargs) -> None:
 为了达成上面这些目标，需要进行下面这些配置：
 
 ### package_data
+
 默认setup.py的构建只会包含package内所有的Python文件。如果你需要在最终构建的程序包中包含非Python文件，那么需要通过
 package_data来指定，它的值是一个键值对，键是包名，值是包含数据文件的所有相对路径的列表。注意这里的相对路径是无法递归包含里面的子目录的。
 而典型的npm run build出来的目录结构如下：
+
 ```
 build
   - static
@@ -179,7 +187,9 @@ build
   manifest.json
   robots.txt
 ```
+
 所以我指定了两层相对路径为：
+
 ```
 package_data={"": [f"build/*", f"build/**/**/*"]}
 ```
@@ -193,6 +203,7 @@ cmdclass是setuptools提供的hook，通过覆盖相应的cmdclass，可以定�
 于是我们需要覆盖的hook，应该是bdist_wheel和sdist的交集：
 
 简单测试一下可知，二者都会调用egg_info这个hook：
+
 ```shell
 $ python setup.py bdist_wheel | grep running
 running bdist_wheel
@@ -210,6 +221,7 @@ running check
 ```
 
 那么覆盖的代码如下：
+
 ```python
 class EggInfoWithJS(egg_info):
     """
@@ -247,6 +259,7 @@ setup(
 ```
 
 这里有几点值得注意的：
+
 - windows下不认环境变量，所以调用subprocess时，需要指定shell=True，否则找不到npm命令
 - 默认打包好的前端静态文件在sqllineagejs/build目录下，构建完成后，我们手动将其移动到sqllineage/build
 - 如果sqllineage/build文件夹存在，那么将会跳过前端构建过程。因为前端代码构建速度比较慢，本地没必要重复执行。而真正发布时，是在GitHub Action的CI机器上执行的，

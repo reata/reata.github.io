@@ -12,6 +12,7 @@ Hive Metastore。而随着开放数据表格式的兴起，Iceberg、Hudi、Delt
 也定义了相关的OpenAPI接口，支持REST类型的catalog。Snowflake开源并捐献给Apache基金会的Polaris Catalog，就是Iceberg REST catalog的一种实现。
 
 ## Iceberg REST Catalog定义了哪些内容？
+
 参考Iceberg的[OpenAPI spec](https://github.com/apache/iceberg/blob/main/open-api/rest-catalog-open-api.yaml)以及
 [Swagger UI](https://editor-next.swagger.io/?url=https://raw.githubusercontent.com/apache/polaris/refs/tags/apache-polaris-0.9.0-incubating/spec/rest-catalog-open-api.yaml),
 这里提供的API包括namespace(也就是database)的增删改查，namespace下table和view的增删改查，以及Iceberg的事务操作，比如单一table的事务更新
@@ -22,6 +23,7 @@ Iceberg的Catalog除去事务是特殊的之外，其它namespace/table/view的�
 ## Polaris Catalog在Iceberg REST Catalog之上提供了什么额外的内容？
 
 ### 多Catalog
+
 Iceberg的REST Catalog是针对单一的catalog的specification，但查询引擎可以不限于只使用单个catalog。以Spark为例，配置时需要指定：
 
 ```shell

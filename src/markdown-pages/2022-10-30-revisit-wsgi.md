@@ -10,13 +10,14 @@ image: "../images/wsgi.png"
 
 试想我们用Django或者Flask等Web应用框架写了一个Web应用，官方文档里都会提到，框架自带的server，像Django的`python manage runserver`或者Flask的`flask --app hello run`，仅供开发阶段调试，不足以处理生产环境的流量。在部署到生产时，都需要将Web应用放在Web服务器后面运行，典型的Web服务器有Gunicorn和uWSGI。Web服务器会提供诸如进程模型、线程模型等并发选项，来提升Web应用的并发性能。
 
-针对上面这个简单的情景，就有四种技术选型组合：Gunicorn + Django, Gunicorn + Flask, uWSGI + Django, uWSGI + Flask。不同的组合，如果要Web应用框架提供不同的Web服务适配代码，N**2的复杂度，显然是不合算的。WSGI存在的目的，就是定义好了Web服务器和Web应用之间的接口。框架的开发者都针对这个接口来编码即可。而对于Web应用的开发，就拥有了更多选型的自由，同样的Django代码，我既可以选择让它跑在Gunicorn上，也可以跑在uWSGI上。
+针对上面这个简单的情景，就有四种技术选型组合：Gunicorn + Django, Gunicorn + Flask, uWSGI + Django, uWSGI + Flask。不同的组合，如果要Web应用框架提供不同的Web服务适配代码，N\*\*2的复杂度，显然是不合算的。WSGI存在的目的，就是定义好了Web服务器和Web应用之间的接口。框架的开发者都针对这个接口来编码即可。而对于Web应用的开发，就拥有了更多选型的自由，同样的Django代码，我既可以选择让它跑在Gunicorn上，也可以跑在uWSGI上。
 
 ## 抛开Web应用框架
 
 在我们讨论Django和Flask针对WSGI的适配之前，让我们再将问题简化一些。Web框架存在的原因是什么？是提供一些便利的功能，比如路由，比如HTTP请求解析，帮助我们更容易更快地写出Web应用对吧。那么其实针对非常简单的应用，我们也是可以不用框架来写的。
 
 PEP定义的WSGI接口非常简单，没有（也不应该）用到任何Web框架：
+
 ```python
 HELLO_WORLD = b"Hello world!\n"
 
@@ -31,11 +32,13 @@ def simple_app(environ, start_response):
 这样一个简单的Web应用，和Web服务器之间，就通过environ环境变量字典和start_response函数来交互。Web服务器会保证传入正确的参数。
 
 假定我们将上面的代码保存在app.py中，并且已经安装好了Gunicorn，那么我们就可以用如下命令来启动这个应用
+
 ```bash
 gunicorn app:simple_app
 ```
 
 默认Gunicorn会绑定8000端口，我们用curl发送一个请求试试
+
 ```bash
 $ curl http://localhost:8000
 Hello world!
@@ -65,6 +68,7 @@ Hello world!
 假定这里我们要在/路径上，实现一个新的POST接口，接收JSON类型的参数，用户传入{"name": "xxx"}，Web应用会返回Hello, xxx! GET接口不变，继续返回Hello, World!
 
 代码如下：
+
 ```python
 import json
 
@@ -101,12 +105,11 @@ $ curl http://localhost:8080/
 Hello World!
 $ curl -X POST http://localhost:8080/ -d '{"name": "reata"}'
 Hello reata!
-$ curl -X PUT http://localhost:8080/                  
+$ curl -X PUT http://localhost:8080/
 Method Not Allowed!
 $ curl http://localhost:8080/non-exist-path
 Not Found!
 ```
-
 
 ## 变得更像Flask
 
@@ -115,11 +118,12 @@ Not Found!
 我们可以参照Flask的API，来做一些简单的封装。
 
 比如将函数切换成class的callable，让Web应用的开发者可以拿到WSGI的app；内部用routes来保存所有path->handler的映射；将environ封装成一个request对象等。
+
 ```python
 class MyWebFramework:
     def __init__(self):
         self.routes = {}
-    
+
     def route(self, path):
     	def wrapper(handler):
             self.routes[path] = handler
@@ -166,6 +170,7 @@ sqllineage是一个SQL数据血缘分析工具，用flask来启动可视化Web�
 当然事实上我们不会自己去实现servlet接口来写Web应用，都是直接用Spring Boot了。近些年随着Spring Boot以及docker的流行，war包的部署形式已经不再常用。但背后的概念是没有变的，`spring-boot-starter-web`只是默认帮你捆绑好了Tomcat，并打成Jar包。servlet的概念不再强调，但依然是存在于应用之中的。
 
 ## 参考阅读
+
 1. [PEP 333 – Python Web Server Gateway Interface v1.0](https://peps.python.org/pep-0333/)
 2. [PEP 3333 – Python Web Server Gateway Interface v1.0.1](https://peps.python.org/pep-3333/)
 3. [Building Your Own Python Web Framework](https://testdriven.io/courses/python-web-framework/)

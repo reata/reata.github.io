@@ -73,6 +73,6 @@ Beam的表达能力，都由自己的SDK提供的API控制，即PCollection和PT
 绝大多数引擎特有的功能，可以简单认为Beam就是不支持。
 
 某种意义上，可以这么说，Flink和Spark的交集，再取一个Beam API能表达的子集，就是Beam的所有表达能力。由于Beam API比较low level，
-所以这个子集其实无限接近于二者的交集。 
+所以这个子集其实无限接近于二者的交集。
 
 表达能力之外，考虑到翻译后不可避免会存在一些性能损耗（比如绕过Spark DataFrame API也就意味着用不了catalyst优化器了），其实Beam的流行度在业界一直不高。
