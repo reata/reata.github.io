@@ -34,9 +34,9 @@
     "gatsby-transformer-remark": "^6.0.0",
     "gatsby-transformer-sharp": "^5.0.0",
     "prismjs": "^1.30.0",
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0",
-    "recharts": "^2.1.14"
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "recharts": "^3.0.0"
   },
   "devDependencies": {
     "gh-pages": "^5.0.0",
