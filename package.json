@@ -17,7 +17,11 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "deploy": "gatsby build && gh-pages -d public -b master",
-    "format": "prettier --write \"src/**/*.{js,jsx,json,css,md}\""
+    "format": "prettier --write \"src/**/*.{js,jsx,json,css,md}\"",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{js,jsx,json,css,md}": "prettier --write"
   },
   "dependencies": {
     "@emotion/react": "^11.9.0",
@@ -44,6 +48,8 @@
   },
   "devDependencies": {
     "gh-pages": "^5.0.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
     "markdown-to-jsx": "^7.4.0",
     "prettier": "^3.8.3"
   }
