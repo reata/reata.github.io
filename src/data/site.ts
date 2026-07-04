@@ -1,0 +1,31 @@
+export const SITE = {
+  title: "Reata's Blog",
+  url: "https://reata.github.io",
+  author: "Reata",
+  authorName: "胡俊伟",
+  role: "Data Engineer",
+  tagline: "Abstraction is good, but don't forget reality.",
+  maxWidth: "1200px",
+  favicon: "/images/icon.png",
+  authorPhoto: "/images/bio-photo.jpg",
+  authorEmail: "mailto:reddevil.hjw@gmail.com",
+  authorGitHub: "https://github.com/reata",
+  authorLocation:
+    "https://www.google.com.hk/maps/place/%E4%B8%AD%E5%9B%BD%E4%B8%8A%E6%B5%B7%E5%B8%82",
+  authorLocationName: "上海 Shanghai, China",
+  giscus: {
+    repo: "reata/reata.github.io",
+    repoId: "MDEwOlJlcG9zaXRvcnk3ODg0OTA1MQ==",
+    category: "Announcements",
+    categoryId: "DIC_kwDOBLMkG84Cq411",
+    mapping: "pathname",
+    theme: "light",
+    lang: "zh-CN",
+  },
+  navLinks: [
+    { title: "Blog", url: "/" },
+    { title: "Gist", url: "/gist/" },
+    { title: "Notebook", url: "/notebook/" },
+    { title: "About", url: "/about/" },
+  ],
+};

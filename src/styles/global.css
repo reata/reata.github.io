@@ -1,0 +1,7 @@
+:root {
+  --text-primary: rgba(0, 0, 0, 0.87);
+  --text-secondary: rgba(0, 0, 0, 0.54);
+  --border-color: rgba(0, 0, 0, 0.12);
+  --border-radius: 4px;
+  --content-width: 740px;
+}
