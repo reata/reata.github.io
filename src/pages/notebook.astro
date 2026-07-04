@@ -1,0 +1,55 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Icon from "../components/Icon.astro";
+import notebooks from "../data/notebooks";
+---
+
+<BaseLayout>
+  <div style="margin-top: 24px;">
+    <h1
+      style="font-size: 2.125rem; font-weight: 400; line-height: 1.235; letter-spacing: 0.00735em; text-align: center; margin-bottom: 24px;"
+    >
+      学习笔记 via Jupyter Notebook
+    </h1>
+    {
+      notebooks.map((notebook) => (
+        <div>
+          <hr style="border: none; border-top: 1px solid var(--border-color);" />
+          <div style="padding: 16px 0;">
+            <h2 style="font-size: 0.875rem; color: var(--text-secondary); font-weight: 500; margin: 0 0 8px 0;">
+              {notebook.title}
+            </h2>
+            {notebook.children!.map((child1) =>
+              child1.children !== null ? (
+                <div>
+                  <p style="color: var(--text-secondary); margin: 8px 0 8px 16px; font-size: 1rem;">
+                    {child1.title}
+                  </p>
+                  {child1.children.map((child2) => (
+                    <a
+                      href={child2.link}
+                      target="_blank"
+                      style="display: flex; align-items: center; gap: 16px; padding: 8px 16px 8px 32px; color: inherit; text-decoration: none; font-size: 1rem;"
+                    >
+                      <Icon name="link" size={24} />
+                      <span>{child2.title}</span>
+                    </a>
+                  ))}
+                </div>
+              ) : (
+                <a
+                  href={child1.link}
+                  target="_blank"
+                  style="display: flex; align-items: center; gap: 16px; padding: 8px 16px 8px 32px; color: inherit; text-decoration: none; font-size: 1rem;"
+                >
+                  <Icon name="link" size={24} />
+                  <span>{child1.title}</span>
+                </a>
+              ),
+            )}
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</BaseLayout>

@@ -1,0 +1,44 @@
+---
+import { SITE } from "../data/site";
+import Icon from "./Icon.astro";
+---
+
+<div
+  style={`padding: 16px; background: rgba(0,0,0,.03); border-radius: var(--border-radius);`}
+>
+  <img
+    src={SITE.authorPhoto}
+    alt={SITE.authorName}
+    style="width: 80px; height: 80px; border-radius: 50%; margin-bottom: 16px;"
+  />
+  <h2 style="font-size: 1.25rem; font-weight: 500; margin: 0 0 8px 0;">
+    {SITE.authorName}
+  </h2>
+  <p style="margin: 0 0 16px 0; color: var(--text-primary);">{SITE.role}</p>
+  <h3 style="font-size: 1rem; margin: 24px 0 12px 0;">Social</h3>
+  <div style="display: flex; flex-direction: column; gap: 8px;">
+    <a
+      href={SITE.authorLocation}
+      target="_blank"
+      style="display: flex; align-items: center; gap: 8px; color: inherit; text-decoration: none; font-size: 0.875rem;"
+    >
+      <Icon name="location" size={20} />
+      {SITE.authorLocationName}
+    </a>
+    <a
+      href={SITE.authorEmail}
+      style="display: flex; align-items: center; gap: 8px; color: inherit; text-decoration: none; font-size: 0.875rem;"
+    >
+      <Icon name="email" size={20} />
+      Email
+    </a>
+    <a
+      href={SITE.authorGitHub}
+      target="_blank"
+      style="display: flex; align-items: center; gap: 8px; color: inherit; text-decoration: none; font-size: 0.875rem;"
+    >
+      <Icon name="github" size={20} />
+      GitHub
+    </a>
+  </div>
+</div>

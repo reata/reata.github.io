@@ -1,0 +1,22 @@
+---
+import { SITE } from "../data/site";
+---
+
+<footer
+  style="padding: 24px 0; margin-top: auto; background-color: rgba(0, 0, 0, 0.05); text-align: center;"
+>
+  <div style={`max-width: ${SITE.maxWidth}; margin: 0 auto; padding: 0 24px;`}>
+    <p
+      style="color: var(--text-secondary); margin: 0 0 8px 0; font-size: 1rem;"
+    >
+      {SITE.tagline}
+    </p>
+    <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0;">
+      Copyright &copy; <a href={SITE.url} style="color: inherit;"
+        >reata.github.io</a
+      >
+      {" "}{new Date().getFullYear()}
+      , powered by Astro &amp; Material UI
+    </p>
+  </div>
+</footer>

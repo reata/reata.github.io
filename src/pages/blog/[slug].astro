@@ -1,0 +1,68 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import GiscusWrapper from "../../components/GiscusWrapper";
+import readingTime from "../../utils/readingTime";
+import { formatDate } from "../../utils/date";
+import { SITE } from "../../data/site";
+import "../../styles/blog-content.css";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("posts");
+  return posts.map((post) => ({
+    params: {
+      slug: post.data.path.replace(/^\/blog\//, "").replace(/\/$/, ""),
+    },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+const formattedDate = formatDate(post.data.date);
+const readMinutes = readingTime(post.body || "");
+const imageUrl = `/images/${post.data.image}`;
+---
+
+<BaseLayout title={`${post.data.title} - ${SITE.title}`}>
+  <div style="display: flex; gap: 8px; margin-top: 40px; margin-bottom: 40px;">
+    <div style="flex: 1; padding: 6px 6px 0 0;">
+      <h1
+        style="font-family: 'Playfair Display', serif; font-size: 48px; text-align: left; margin-bottom: 8px;"
+      >
+        {post.data.title}
+      </h1>
+      <p
+        style="font-family: Lato, sans-serif; font-size: 21px; color: var(--text-secondary);"
+      >
+        {post.data.excerpt}
+      </p>
+      <div
+        style="font-family: Lato, sans-serif; font-size: 16px; font-weight: 400; margin-top: 16px;"
+      >
+        <a href={SITE.url}>{SITE.author}</a>
+      </div>
+      <div style="color: var(--text-secondary);">
+        {formattedDate}
+        <span>·</span>
+        {readMinutes} min read
+      </div>
+    </div>
+    <div style="flex: 1;">
+      <img
+        src={imageUrl}
+        alt=""
+        style="width: 100%; border-radius: var(--border-radius);"
+      />
+    </div>
+  </div>
+  <div style="display: flex; justify-content: center;">
+    <div class="blog-content" style="width: var(--content-width);">
+      <Content />
+    </div>
+  </div>
+  <div style="margin-top: 64px;">
+    <GiscusWrapper client:visible />
+  </div>
+</BaseLayout>

@@ -2,28 +2,35 @@
   "name": "reata-s-blog",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "description": "Reata's Blog",
   "author": "reata",
   "keywords": [
-    "gatsby"
+    "astro",
+    "blog"
   ],
   "engines": {
     "node": ">=22.0.0"
   },
   "scripts": {
-    "develop": "gatsby develop",
-    "start": "gatsby develop",
-    "build": "gatsby build",
-    "serve": "gatsby serve",
-    "clean": "gatsby clean",
-    "deploy": "gatsby build && gh-pages -d public -b master",
-    "format": "prettier --write \"src/**/*.{js,jsx,json,css,md}\"",
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "clean": "rm -rf dist .astro",
+    "deploy": "astro build && gh-pages -d dist -b master -t",
+    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,astro,json,css,md}\"",
     "prepare": "husky"
   },
   "lint-staged": {
-    "*.{js,jsx,json,css,md}": "prettier --write"
+    "*.{js,jsx,ts,tsx,astro}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,css,md}": "prettier --write"
   },
   "dependencies": {
+    "@astrojs/react": "^5.0.0",
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
     "@fontsource/roboto": "^5.2.10",
@@ -31,26 +38,20 @@
     "@mui/icons-material": "^9.0.0",
     "@mui/lab": "^9.0.0-beta.2",
     "@mui/material": "^9.0.0",
-    "gatsby": "^5.16.1",
-    "gatsby-legacy-polyfills": "^3.0.0",
-    "gatsby-plugin-image": "^3.0.0",
-    "gatsby-plugin-manifest": "^5.0.0",
-    "gatsby-plugin-sharp": "^5.0.0",
-    "gatsby-remark-images": "^7.0.0",
-    "gatsby-remark-prismjs": "^7.0.0",
-    "gatsby-source-filesystem": "^5.0.0",
-    "gatsby-transformer-remark": "^6.0.0",
-    "gatsby-transformer-sharp": "^5.0.0",
+    "astro": "^5.0.0",
     "prismjs": "^1.30.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "recharts": "^3.0.0"
   },
   "devDependencies": {
+    "@typescript-eslint/parser": "^8.62.1",
+    "eslint": "^10.6.0",
+    "eslint-plugin-astro": "^1.7.0",
     "gh-pages": "^5.0.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.4.0",
-    "markdown-to-jsx": "^7.4.0",
-    "prettier": "^3.8.3"
+    "prettier": "^3.8.3",
+    "prettier-plugin-astro": "^0.14.1"
   }
 }

@@ -1,0 +1,42 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import MainFeaturedPost from "../components/MainFeaturedPost.astro";
+import FeaturedPost from "../components/FeaturedPost.astro";
+import Post from "../components/Post.astro";
+import Sidebar from "../components/Sidebar.astro";
+import readingTime from "../utils/readingTime";
+import { formatDate } from "../utils/date";
+
+const posts = await getCollection("posts");
+
+const processed = posts
+  .sort((a, b) => (a.data.date < b.data.date ? 1 : -1))
+  .map((post) => ({
+    title: post.data.title,
+    excerpt: post.data.excerpt,
+    date: formatDate(post.data.date),
+    slug: post.data.path,
+    image: `/images/${post.data.image}`,
+    readMinutes: readingTime(post.body || ""),
+  }));
+
+const mainFeaturedPost = processed[0];
+const featuredPosts = processed.slice(1, 3);
+const otherPosts = processed.slice(3);
+---
+
+<BaseLayout>
+  <MainFeaturedPost post={mainFeaturedPost} />
+  <FeaturedPost posts={featuredPosts} />
+  <div style="display: flex; gap: 40px; margin-top: 24px;">
+    <div
+      style="flex: 1; padding-right: 16px; border-right: 1px solid var(--border-color);"
+    >
+      <Post posts={otherPosts} />
+    </div>
+    <div style="width: 300px; flex-shrink: 0;">
+      <Sidebar />
+    </div>
+  </div>
+</BaseLayout>

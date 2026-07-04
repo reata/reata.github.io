@@ -1,0 +1,35 @@
+---
+import Section from "../components/Section.astro";
+import Footer from "../components/Footer.astro";
+import { SITE } from "../data/site";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
+import "prismjs/themes/prism-solarizedlight.css";
+import "../styles/global.css";
+
+const { title = SITE.title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <link rel="icon" href={SITE.favicon} />
+  </head>
+  <body
+    style={`margin: 0; display: flex; flex-direction: column; min-height: 100vh; font-family: Roboto, Helvetica, Arial, sans-serif; color: var(--text-primary); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;`}
+  >
+    <div
+      style={`flex: 1; max-width: ${SITE.maxWidth}; width: 100%; margin: 0 auto; padding: 0 24px;`}
+    >
+      <Section />
+      <main>
+        <slot />
+      </main>
+    </div>
+    <Footer />
+  </body>
+</html>

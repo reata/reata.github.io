@@ -1,0 +1,24 @@
+---
+import { SITE } from "../data/site";
+
+const currentPath = Astro.url.pathname.replace(/\/$/, "/");
+---
+
+<nav
+  style="display: flex; justify-content: center; gap: 8px; padding: 12px 0; overflow-x: auto;"
+>
+  {
+    SITE.navLinks.map((section) => {
+      const isActive = currentPath === section.url;
+      return (
+        <a
+          href={section.url}
+          aria-current={isActive ? "page" : undefined}
+          style={`display: inline-flex; align-items: center; height: 32px; padding: 0 16px; border-radius: 16px; background: ${isActive ? "var(--text-primary)" : "#e0e0e0"}; color: ${isActive ? "#fff" : "var(--text-primary)"}; text-decoration: none; font-size: 0.875rem; font-weight: ${isActive ? "600" : "500"}; transition: background-color 0.2s, color 0.2s;`}
+        >
+          {section.title}
+        </a>
+      );
+    })
+  }
+</nav>
