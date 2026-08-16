@@ -42,7 +42,7 @@
     "prismjs": "^1.30.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "recharts": "^3.0.0"
+    "recharts": "^3.10.1"
   },
   "devDependencies": {
     "@typescript-eslint/parser": "^8.62.1",
