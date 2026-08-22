@@ -30,28 +30,28 @@
     "*.{json,css,md}": "prettier --write"
   },
   "dependencies": {
-    "@astrojs/react": "^6.0.0",
+    "@astrojs/react": "^6.0.3",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@fontsource/roboto": "^5.3.0",
     "@giscus/react": "^3.1.0",
-    "@mui/icons-material": "^9.0.0",
+    "@mui/icons-material": "^9.3.1",
     "@mui/lab": "^9.0.0-beta.8",
     "@mui/material": "^9.0.0",
     "astro": "^7.2.3",
     "prismjs": "^1.30.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
     "recharts": "^3.10.1"
   },
   "devDependencies": {
-    "@typescript-eslint/parser": "^8.62.1",
-    "eslint": "^10.6.0",
+    "@typescript-eslint/parser": "^8.67.0",
+    "eslint": "^10.8.1",
     "eslint-plugin-astro": "^3.1.0",
     "gh-pages": "^5.0.0",
     "husky": "^9.1.7",
     "lint-staged": "^17.3.0",
-    "prettier": "^3.8.3",
+    "prettier": "^3.9.6",
     "prettier-plugin-astro": "^0.14.1"
   }
 }
