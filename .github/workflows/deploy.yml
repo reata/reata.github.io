@@ -3,12 +3,6 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [source]
-  workflow_dispatch:
-    inputs:
-      ref:
-        description: 'Commit SHA, branch, or tag to deploy (defaults to source)'
-        required: false
-        default: source
 
 permissions:
   contents: read
@@ -26,8 +20,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.ref || github.sha }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
