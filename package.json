@@ -10,8 +10,7 @@
     "blog"
   ],
   "engines": {
-    "node": ">=24.0.0",
-    "npm": ">=11"
+    "node": ">=24.0.0"
   },
   "scripts": {
     "dev": "astro dev",
