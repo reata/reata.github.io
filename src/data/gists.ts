@@ -9,6 +9,10 @@ const gists: Gist[] = [
     link: "https://gist.github.com/reata/b1b0272f0365e6edb5b719d12c2553e6",
   },
   {
+    title: "构建索引实现点查Parquet文件",
+    link: "https://gist.github.com/reata/aefabfaf784ae37bd5eff44c28f7037f",
+  },
+  {
     title: "任意的二进制数据都可以用UTF-8解码吗？",
     link: "https://gist.github.com/reata/2eef6e514c70216c94ff0222aad0b2e4",
   },
