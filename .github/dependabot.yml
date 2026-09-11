@@ -24,3 +24,25 @@ updates:
         applies-to: security-updates
         patterns:
           - "*"
+
+  # GitHub Actions workflows: grouped weekly version updates + grouped security updates
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: friday
+      time: "18:00"
+      timezone: Asia/Shanghai
+    open-pull-requests-limit: 5
+    groups:
+      version-updates:
+        applies-to: version-updates
+        update-types:
+          - minor
+          - patch
+        patterns:
+          - "*"
+      security:
+        applies-to: security-updates
+        patterns:
+          - "*"
