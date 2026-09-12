@@ -39,10 +39,12 @@ import {
   Legend,
   Line,
   LineChart,
+  ReferenceDot,
   Tooltip,
   XAxis,
   YAxis,
 } from "recharts";
+import downloadTrendAnnotations from "../data/sqllineage";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -274,6 +276,22 @@ const strokeColors = {
   Darwin: "#ea8f74",
   Windows: "#993f4e",
   null: "#a6a8aa",
+};
+
+const annotationColors = {
+  up: "#2e7d32",
+  down: "#c62828",
+};
+
+/**
+ * recharts renders ReferenceDot into a portal, so wrapping it in an <a> would
+ * leave an empty anchor behind. Open the link imperatively instead, from the
+ * click handlers we attach to the dot and to the label text.
+ */
+const openAnnotationLink = (link) => () => {
+  if (link) {
+    window.open(link, "_blank", "noopener,noreferrer");
+  }
 };
 
 export default function SQLLineageContent() {
@@ -525,6 +543,32 @@ export default function SQLLineageContent() {
                   key={category[0]}
                 />
               ))}
+              {dimension === "overall" &&
+                downloadTrendAnnotations.map((annotation) => (
+                  <ReferenceDot
+                    key={annotation.x}
+                    x={annotation.x}
+                    y={annotation.y}
+                    r={4}
+                    zIndex={1300}
+                    fill="#ffffff"
+                    stroke={annotationColors[annotation.direction ?? "up"]}
+                    strokeWidth={2}
+                    cursor={annotation.link ? "pointer" : undefined}
+                    onClick={openAnnotationLink(annotation.link)}
+                    label={{
+                      value: annotation.title,
+                      position: annotation.position ?? "top",
+                      fontSize: 12,
+                      fill: annotationColors[annotation.direction ?? "up"],
+                      stroke: "#ffffff",
+                      strokeWidth: 3,
+                      paintOrder: "stroke",
+                      cursor: annotation.link ? "pointer" : undefined,
+                      onClick: openAnnotationLink(annotation.link),
+                    }}
+                  />
+                ))}
             </LineChart>
           </Box>
         </Box>
@@ -545,6 +589,7 @@ export default function SQLLineageContent() {
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="date" minTickGap={50} />
             <YAxis />
+            <Tooltip />
             <Area type="monotone" dataKey="star_cum_cnt" stroke="#00516c" />
           </AreaChart>
         </Box>
