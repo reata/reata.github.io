@@ -308,7 +308,7 @@ export default function SQLLineageContent() {
   const [openIssues, setOpenIssues] = useState(0);
 
   useEffect(() => {
-    fetch(`${backend_api}/api/pypistats/api/packages/sqllineage/recent`)
+    fetch(`${backend_api}/api/clickpy/sqllineage/recent`)
       .then((res) => res.json())
       .then(
         (result) => {
@@ -337,7 +337,7 @@ export default function SQLLineageContent() {
   }, []);
 
   useEffect(() => {
-    fetch(`${backend_api}/api/pypistats/api/packages/sqllineage/${dimension}`)
+    fetch(`${backend_api}/api/clickpy/sqllineage/${dimension}`)
       .then((res) => res.json())
       .then(
         (result) => {
