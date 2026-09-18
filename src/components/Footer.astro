@@ -24,7 +24,9 @@ const socials = [
 <footer class="site-footer">
   <div class="footer-inner" style={`max-width: ${SITE.maxWidth};`}>
     <div class="footer-brand">
-      <a class="footer-name" href="/">{SITE.author}</a>
+      <a class="footer-name" href="/">
+        {SITE.author}
+      </a>
       <span class="footer-dot" aria-hidden="true"></span>
       <p class="footer-tagline">{SITE.tagline}</p>
     </div>
@@ -33,31 +35,32 @@ const socials = [
       <p class="footer-copy">
         <span>&copy; {year}</span>
         <a href={SITE.url}>reata.github.io</a>
-        <span class="footer-sep" aria-hidden="true">&middot;</span>
+        <span class="footer-sep" aria-hidden="true">
+          &middot;
+        </span>
         <span class="footer-powered">
-          Built with <a href="https://astro.build" rel="noopener noreferrer"
-            >Astro</a
-          >
+          Built with{" "}
+          <a href="https://astro.build" rel="noopener noreferrer">
+            Astro
+          </a>
         </span>
       </p>
 
       <ul class="footer-social">
-        {
-          socials.map((social) => (
-            <li>
-              <a
-                class="social-link"
-                href={social.href}
-                aria-label={social.label}
-                title={social.label}
-                target={social.external ? "_blank" : undefined}
-                rel={social.external ? "noopener noreferrer" : undefined}
-              >
-                <Icon name={social.name} size={18} color="currentColor" />
-              </a>
-            </li>
-          ))
-        }
+        {socials.map((social) => (
+          <li>
+            <a
+              class="social-link"
+              href={social.href}
+              aria-label={social.label}
+              title={social.label}
+              target={social.external ? "_blank" : undefined}
+              rel={social.external ? "noopener noreferrer" : undefined}
+            >
+              <Icon name={social.name} size={18} color="currentColor" />
+            </a>
+          </li>
+        ))}
       </ul>
     </div>
   </div>
