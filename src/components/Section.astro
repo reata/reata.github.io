@@ -13,22 +13,20 @@ const currentPath = normalize(Astro.url.pathname);
 
     <nav class="site-nav" aria-label="Main navigation">
       <ul class="nav-list">
-        {
-          SITE.navLinks.map((section) => {
-            const isActive = currentPath === normalize(section.url);
-            return (
-              <li class="nav-item">
-                <a
-                  class:list={["nav-link", { active: isActive }]}
-                  href={section.url}
-                  aria-current={isActive ? "page" : undefined}
-                >
-                  {section.title}
-                </a>
-              </li>
-            );
-          })
-        }
+        {SITE.navLinks.map((section) => {
+          const isActive = currentPath === normalize(section.url);
+          return (
+            <li class="nav-item">
+              <a
+                class:list={["nav-link", { active: isActive }]}
+                href={section.url}
+                aria-current={isActive ? "page" : undefined}
+              >
+                {section.title}
+              </a>
+            </li>
+          );
+        })}
       </ul>
     </nav>
   </div>

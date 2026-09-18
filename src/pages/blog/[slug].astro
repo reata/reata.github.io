@@ -28,19 +28,13 @@ const imageUrl = `/images/${post.data.image}`;
 <BaseLayout title={`${post.data.title} - ${SITE.title}`}>
   <div style="display: flex; gap: 8px; margin-top: 40px; margin-bottom: 40px;">
     <div style="flex: 1; padding: 6px 6px 0 0;">
-      <h1
-        style="font-family: 'Playfair Display', serif; font-size: 48px; text-align: left; margin-bottom: 8px;"
-      >
+      <h1 style="font-family: 'Playfair Display', serif; font-size: 48px; text-align: left; margin-bottom: 8px;">
         {post.data.title}
       </h1>
-      <p
-        style="font-family: Lato, sans-serif; font-size: 21px; color: var(--text-secondary);"
-      >
+      <p style="font-family: Lato, sans-serif; font-size: 21px; color: var(--text-secondary);">
         {post.data.excerpt}
       </p>
-      <div
-        style="font-family: Lato, sans-serif; font-size: 16px; font-weight: 400; margin-top: 16px;"
-      >
+      <div style="font-family: Lato, sans-serif; font-size: 16px; font-weight: 400; margin-top: 16px;">
         <a href={SITE.url}>{SITE.author}</a>
       </div>
       <div style="color: var(--text-secondary);">
