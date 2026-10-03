@@ -34,6 +34,8 @@ import HotelIcon from "@mui/icons-material/Hotel";
 import LaptopMacIcon from "@mui/icons-material/LaptopMac";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import RepeatIcon from "@mui/icons-material/Repeat";
+import { parseAsStringLiteral, useQueryState } from "nuqs";
+import { NuqsAdapter } from "nuqs/adapters/react";
 import {
   Area,
   AreaChart,
@@ -48,18 +50,16 @@ import {
 } from "recharts";
 import downloadTrendAnnotations from "../data/sqllineage";
 
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
-
+function TabPanel({ children, value, id, ...other }) {
   return (
     <div
       role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
+      hidden={value !== id}
+      id={`simple-tabpanel-${id}`}
+      aria-labelledby={`simple-tab-${id}`}
       {...other}
     >
-      {value === index && (
+      {value === id && (
         <Box sx={{ p: 3 }}>
           <Typography>{children}</Typography>
         </Box>
@@ -68,12 +68,19 @@ function TabPanel(props) {
   );
 }
 
-function a11yProps(index) {
-  return {
-    id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`,
-  };
-}
+/**
+ * Tabs are addressed by id in the `tab` query string, so nuqs gives every tab
+ * its own shareable URL, e.g. /project/sqllineage/?tab=dashboard
+ */
+const tabs = [
+  { id: "intro", label: "项目介绍" },
+  { id: "dashboard", label: "仪表盘" },
+  { id: "milestones", label: "里程碑" },
+];
+const tabIds = tabs.map((tab) => tab.id);
+const tabParser = parseAsStringLiteral(tabIds)
+  .withDefault(tabIds[0])
+  .withOptions({ history: "push" });
 
 const data = [
   {
@@ -297,7 +304,17 @@ const openAnnotationLink = (link) => () => {
 };
 
 export default function SQLLineageContent() {
-  const [value, setValue] = useState(0);
+  return (
+    <NuqsAdapter>
+      <SQLLineageDashboard />
+    </NuqsAdapter>
+  );
+}
+
+function SQLLineageDashboard() {
+  // The URL is the source of truth for the active tab; nuqs handles reading
+  // it, updating it and reacting to back/forward navigation.
+  const [tab, setTab] = useQueryState("tab", tabParser);
   const [download, setDownload] = useState(0);
   const [downloadDaily, setDownloadDaily] = useState(0);
   const [downloadWeekly, setDownloadWeekly] = useState(0);
@@ -374,7 +391,9 @@ export default function SQLLineageContent() {
       );
   }, [dimension, windowSize]);
 
-  const handleChange = (_event, newValue) => setValue(newValue);
+  // The tabs carry a real href so they can be opened in a new tab, but a plain
+  // left click should switch tabs in place rather than reload the document.
+  const handleTabClick = (event) => event.preventDefault();
   const handleSelect = (event) => setDimension(event.target.value);
   const handleWindowSelect = (event) => setWindowSize(event.target.value);
   const selectCategory = (event) => {
@@ -410,15 +429,24 @@ export default function SQLLineageContent() {
             SQLLineage
           </Typography>
           <Tabs
-            value={value}
-            onChange={handleChange}
+            value={tab}
+            onChange={(_event, newTab) => setTab(newTab)}
             centered
             textColor="inherit"
             indicatorColor="secondary"
           >
-            <Tab label="项目介绍" {...a11yProps(0)} />
-            <Tab label="仪表盘" {...a11yProps(1)} />
-            <Tab label="里程碑" {...a11yProps(2)} />
+            {tabs.map(({ id, label }) => (
+              <Tab
+                key={id}
+                value={id}
+                component="a"
+                href={`?tab=${id}`}
+                onClick={handleTabClick}
+                label={label}
+                id={`simple-tab-${id}`}
+                aria-controls={`simple-tabpanel-${id}`}
+              />
+            ))}
           </Tabs>
           <Link
             href="https://github.com/reata/sqllineage"
@@ -429,7 +457,7 @@ export default function SQLLineageContent() {
           </Link>
         </Toolbar>
       </AppBar>
-      <TabPanel value={value} index={0}>
+      <TabPanel value={tab} id="intro">
         <Box sx={{ paddingTop: 8, paddingBottom: 6 }}>
           <Container maxWidth="sm">
             <Typography
@@ -495,7 +523,7 @@ export default function SQLLineageContent() {
           </Container>
         </Box>
       </TabPanel>
-      <TabPanel value={value} index={1}>
+      <TabPanel value={tab} id="dashboard">
         <Grid container spacing={3}>
           {statCards.map((card) => (
             <Grid size={{ xs: 12, sm: 6, md: 3 }} key={card.title}>
@@ -677,7 +705,7 @@ export default function SQLLineageContent() {
           </AreaChart>
         </Box>
       </TabPanel>
-      <TabPanel value={value} index={2}>
+      <TabPanel value={tab} id="milestones">
         <Timeline position="alternate">
           {data.map((item, idx) => (
             <TimelineItem key={idx}>
