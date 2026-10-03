@@ -350,9 +350,6 @@ export default function SQLLineageContent() {
       .then((res) => res.json())
       .then(
         (result) => {
-          // The long windows come back bucketed by week, and a bare
-          // MM-DD label repeats itself once the span passes a year.
-          const weekly = result.interval === "week";
           let categories = {};
           let date_to_cnt = {};
           for (let i = 0; i < result.data.length; i++) {
@@ -367,7 +364,7 @@ export default function SQLLineageContent() {
           let trend = [];
           for (const key of Object.keys(date_to_cnt).sort()) {
             let value = date_to_cnt[key];
-            value["name"] = weekly ? key.slice(2) : key.slice(5, 10);
+            value["date"] = key;
             trend.push(value);
           }
           setDimensionAttribute(categories);
@@ -590,7 +587,7 @@ export default function SQLLineageContent() {
                   label="Time Range"
                   onChange={handleWindowSelect}
                 >
-                  <MenuItem value={"180d"}>过去180天</MenuItem>
+                  <MenuItem value={"180d"}>过去半年</MenuItem>
                   <MenuItem value={"1y"}>过去1年</MenuItem>
                   <MenuItem value={"3y"}>过去3年</MenuItem>
                   <MenuItem value={"all"}>全部</MenuItem>
@@ -606,7 +603,7 @@ export default function SQLLineageContent() {
               margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
             >
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" minTickGap={20} />
+              <XAxis dataKey="date" minTickGap={20} />
               <YAxis />
               <Tooltip />
               <Legend onClick={selectCategory} />
@@ -620,31 +617,41 @@ export default function SQLLineageContent() {
                 />
               ))}
               {dimension === "overall" &&
-                downloadTrendAnnotations.map((annotation) => (
-                  <ReferenceDot
-                    key={annotation.x}
-                    x={annotation.x}
-                    y={annotation.y}
-                    r={4}
-                    zIndex={1300}
-                    fill="#ffffff"
-                    stroke={annotationColors[annotation.direction ?? "up"]}
-                    strokeWidth={2}
-                    cursor={annotation.link ? "pointer" : undefined}
-                    onClick={openAnnotationLink(annotation.link)}
-                    label={{
-                      value: annotation.title,
-                      position: annotation.position ?? "top",
-                      fontSize: 12,
-                      fill: annotationColors[annotation.direction ?? "up"],
-                      stroke: "#ffffff",
-                      strokeWidth: 3,
-                      paintOrder: "stroke",
-                      cursor: annotation.link ? "pointer" : undefined,
-                      onClick: openAnnotationLink(annotation.link),
-                    }}
-                  />
-                ))}
+                downloadTrendAnnotations.map((annotation) => {
+                  // The long windows are bucketed by week, so the event's own
+                  // day may not be a point: take the last one on or before it.
+                  const point = downloadTrend.findLast(
+                    (entry) => entry.date <= annotation.date,
+                  );
+                  if (point === undefined) {
+                    return null;
+                  }
+                  return (
+                    <ReferenceDot
+                      key={annotation.date}
+                      x={point.date}
+                      y={point.with_mirrors}
+                      r={4}
+                      zIndex={1300}
+                      fill="#ffffff"
+                      stroke={annotationColors[annotation.direction ?? "up"]}
+                      strokeWidth={2}
+                      cursor={annotation.link ? "pointer" : undefined}
+                      onClick={openAnnotationLink(annotation.link)}
+                      label={{
+                        value: annotation.title,
+                        position: annotation.position ?? "top",
+                        fontSize: 12,
+                        fill: annotationColors[annotation.direction ?? "up"],
+                        stroke: "#ffffff",
+                        strokeWidth: 3,
+                        paintOrder: "stroke",
+                        cursor: annotation.link ? "pointer" : undefined,
+                        onClick: openAnnotationLink(annotation.link),
+                      }}
+                    />
+                  );
+                })}
             </LineChart>
           </Box>
         </Box>
