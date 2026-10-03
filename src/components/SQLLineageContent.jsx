@@ -16,6 +16,7 @@ import {
   Tab,
   Tabs,
   Toolbar,
+  Tooltip as MuiTooltip,
   Typography,
 } from "@mui/material";
 import {
@@ -31,6 +32,7 @@ import FastfoodIcon from "@mui/icons-material/Fastfood";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import HotelIcon from "@mui/icons-material/Hotel";
 import LaptopMacIcon from "@mui/icons-material/LaptopMac";
+import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import RepeatIcon from "@mui/icons-material/Repeat";
 import {
   Area,
@@ -306,6 +308,8 @@ export default function SQLLineageContent() {
   const [starTrend, setStarTrend] = useState([]);
   const [fork, setFork] = useState(0);
   const [openIssues, setOpenIssues] = useState(0);
+  const [rank, setRank] = useState(null);
+  const [rankPercentile, setRankPercentile] = useState(null);
 
   useEffect(() => {
     fetch(`${backend_api}/api/clickpy/sqllineage/recent`)
@@ -315,6 +319,8 @@ export default function SQLLineageContent() {
           setDownload(result.data.last_month);
           setDownloadWeekly(result.data.last_week);
           setDownloadDaily(result.data.last_day);
+          setRank(result.data.rank_month);
+          setRankPercentile(result.data.rank_month_percentile);
         },
         (error) => console.log(error),
       );
@@ -374,9 +380,19 @@ export default function SQLLineageContent() {
   };
 
   const statCards = [
-    { title: "PyPI昨日下载量", data: downloadDaily },
-    { title: "PyPI上周下载量", data: downloadWeekly },
-    { title: "PyPI月下载量", data: download },
+    { title: "PyPI昨天下载量", data: downloadDaily },
+    { title: "PyPI过去7天下载量", data: downloadWeekly },
+    { title: "PyPI过去30天下载量", data: download },
+    {
+      title: "PyPI上月下载量排名",
+      data: Number.isFinite(rank) ? `#${rank}` : "-",
+      href: "https://hugovk.dev/top-pypi-packages/",
+      hint: "上个自然月下载量在所有 PyPI 包中的排名，点击查看详细榜单",
+    },
+    {
+      title: "PyPI上月下载量排名分位数",
+      data: Number.isFinite(rankPercentile) ? `${rankPercentile}%` : "-",
+    },
     { title: "GitHub Star", data: star },
     { title: "GitHub Fork", data: fork },
     { title: "GitHub Open Issues", data: openIssues },
@@ -478,18 +494,52 @@ export default function SQLLineageContent() {
       <TabPanel value={value} index={1}>
         <Grid container spacing={3}>
           {statCards.map((card) => (
-            <Grid size="grow" key={card.title}>
-              <Card>
-                <CardContent>
+            <Grid size={{ xs: 12, sm: 6, md: 3 }} key={card.title}>
+              <Card
+                sx={{
+                  height: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
+                <CardContent
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    flexGrow: 1,
+                  }}
+                >
                   <Typography
                     component="h2"
                     variant="h6"
                     color="primary"
                     gutterBottom
                   >
-                    {card.title}
+                    {card.href ? (
+                      <MuiTooltip title={card.hint} arrow>
+                        <Link
+                          href={card.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          color="inherit"
+                          underline="hover"
+                          sx={{
+                            display: "inline-flex",
+                            alignItems: "center",
+                            gap: 0.5,
+                          }}
+                        >
+                          {card.title}
+                          <OpenInNewIcon sx={{ fontSize: "0.8em" }} />
+                        </Link>
+                      </MuiTooltip>
+                    ) : (
+                      card.title
+                    )}
                   </Typography>
-                  <Typography variant="h3">{card.data}</Typography>
+                  <Typography variant="h3" sx={{ mt: "auto" }}>
+                    {card.data}
+                  </Typography>
                 </CardContent>
               </Card>
             </Grid>
