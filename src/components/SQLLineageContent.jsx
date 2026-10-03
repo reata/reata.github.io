@@ -304,6 +304,7 @@ export default function SQLLineageContent() {
   const [downloadTrend, setDownloadTrend] = useState([]);
   const [dimensionAttribute, setDimensionAttribute] = useState({});
   const [dimension, setDimension] = useState("overall");
+  const [windowSize, setWindowSize] = useState("180d");
   const [star, setStar] = useState(0);
   const [starTrend, setStarTrend] = useState([]);
   const [fork, setFork] = useState(0);
@@ -343,10 +344,15 @@ export default function SQLLineageContent() {
   }, []);
 
   useEffect(() => {
-    fetch(`${backend_api}/api/clickpy/sqllineage/${dimension}`)
+    fetch(
+      `${backend_api}/api/clickpy/sqllineage/${dimension}?window=${windowSize}`,
+    )
       .then((res) => res.json())
       .then(
         (result) => {
+          // The long windows come back bucketed by week, and a bare
+          // MM-DD label repeats itself once the span passes a year.
+          const weekly = result.interval === "week";
           let categories = {};
           let date_to_cnt = {};
           for (let i = 0; i < result.data.length; i++) {
@@ -361,7 +367,7 @@ export default function SQLLineageContent() {
           let trend = [];
           for (const key of Object.keys(date_to_cnt).sort()) {
             let value = date_to_cnt[key];
-            value["name"] = key.slice(5, 10);
+            value["name"] = weekly ? key.slice(2) : key.slice(5, 10);
             trend.push(value);
           }
           setDimensionAttribute(categories);
@@ -369,10 +375,11 @@ export default function SQLLineageContent() {
         },
         (error) => console.log(error),
       );
-  }, [dimension]);
+  }, [dimension, windowSize]);
 
   const handleChange = (_event, newValue) => setValue(newValue);
   const handleSelect = (event) => setDimension(event.target.value);
+  const handleWindowSelect = (event) => setWindowSize(event.target.value);
   const selectCategory = (event) => {
     let category = { ...dimensionAttribute };
     category[event.value] = !category[event.value];
@@ -549,16 +556,22 @@ export default function SQLLineageContent() {
           <Box
             sx={{
               display: "flex",
-              justifyContent: "space-between",
               alignItems: "center",
               width: "100%",
               marginBottom: 2,
             }}
           >
-            <Box sx={{ width: 120 }} />
+            <Box sx={{ flex: 1 }} />
             <Typography variant="h5">PyPI下载趋势</Typography>
-            <Box sx={{ width: 120 }}>
-              <FormControl fullWidth>
+            <Box
+              sx={{
+                flex: 1,
+                display: "flex",
+                justifyContent: "flex-end",
+                gap: 2,
+              }}
+            >
+              <FormControl sx={{ minWidth: 120 }}>
                 <InputLabel>分类</InputLabel>
                 <Select
                   value={dimension}
@@ -568,6 +581,19 @@ export default function SQLLineageContent() {
                   <MenuItem value={"overall"}>总体趋势</MenuItem>
                   <MenuItem value={"python_minor"}>Python版本</MenuItem>
                   <MenuItem value={"system"}>操作系统</MenuItem>
+                </Select>
+              </FormControl>
+              <FormControl sx={{ minWidth: 120 }}>
+                <InputLabel>时间范围</InputLabel>
+                <Select
+                  value={windowSize}
+                  label="Time Range"
+                  onChange={handleWindowSelect}
+                >
+                  <MenuItem value={"180d"}>过去180天</MenuItem>
+                  <MenuItem value={"1y"}>过去1年</MenuItem>
+                  <MenuItem value={"3y"}>过去3年</MenuItem>
+                  <MenuItem value={"all"}>全部</MenuItem>
                 </Select>
               </FormControl>
             </Box>
