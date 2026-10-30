@@ -33,7 +33,7 @@
     "*.{json,css,md}": "prettier --write"
   },
   "dependencies": {
-    "@astrojs/react": "^7.1.0",
+    "@astrojs/react": "^7.1.1",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@fontsource/roboto": "^5.3.0",
@@ -41,7 +41,7 @@
     "@mui/icons-material": "^9.5.0",
     "@mui/lab": "^9.0.0-beta.10",
     "@mui/material": "^9.0.0",
-    "astro": "^7.4.1",
+    "astro": "^7.4.2",
     "nuqs": "^2.10.2",
     "prismjs": "^1.30.0",
     "react": "^19.3.1",
@@ -49,12 +49,12 @@
     "recharts": "^3.10.1"
   },
   "devDependencies": {
-    "@typescript-eslint/parser": "^8.72.0",
+    "@typescript-eslint/parser": "^8.72.1",
     "eslint": "^10.13.0",
     "eslint-plugin-astro": "^3.2.1",
     "husky": "^9.1.7",
     "lint-staged": "^17.6.0",
     "prettier": "^3.9.10",
-    "prettier-plugin-astro": "^1.1.1"
+    "prettier-plugin-astro": "^1.1.2"
   }
 }
